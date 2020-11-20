@@ -1,12 +1,14 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import FooterHome from "../../components/FooterHome";
 import NavbarHome from "../../components/NavbarHome";
 
 function HomeLayout(props) {
   return (
     <div>
-      <NavbarHome />
+      {/* <NavbarHome /> */}
       {props.children}
+      <FooterHome />
     </div>
   );
 }
