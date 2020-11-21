@@ -1,7 +1,9 @@
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import AdminTemplate from "./containers/AdminTemplate";
 import HomeTemplate from "./containers/HomeTemplate";
+import LoginPage from "./containers/HomeTemplate/LoginPage";
+import PageNotFound from "./containers/PageNotFound";
 import { routesAdmin, routesHome } from "./routes";
 
 function App() {
@@ -29,8 +31,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      {showLayout(routesHome, "home")}
-      {showLayout(routesAdmin, "admin")}
+      <Switch>
+        {showLayout(routesHome, "home")}
+        {showLayout(routesAdmin, "admin")}
+
+        <Route path="/dang-nhap" component={LoginPage} />
+        <Route path="*" component={PageNotFound} />
+      </Switch>
     </BrowserRouter>
   );
 }

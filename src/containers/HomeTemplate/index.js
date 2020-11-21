@@ -6,7 +6,7 @@ import NavbarHome from "../../components/NavbarHome";
 function HomeLayout(props) {
   return (
     <div>
-      {/* <NavbarHome /> */}
+      <NavbarHome />
       {props.children}
       <FooterHome />
     </div>
