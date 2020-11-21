@@ -3,6 +3,8 @@ import { Switch } from "@material-ui/core";
 import Brightness2Icon from "@material-ui/icons/Brightness2";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 
+//lưu vào localStorage để khi load page hoặc vào trang lại có thể lấy lại theme
+
 export default function SwitchMode() {
   const [state, setState] = useState({
     switchMode: false,

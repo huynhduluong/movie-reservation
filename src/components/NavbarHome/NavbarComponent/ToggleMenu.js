@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import SwitchMode from "./SwitchMode";
 import UserIcon from "./UserIcon";
 
@@ -38,7 +39,7 @@ export default function ToggleMenu() {
         <ListItem button>
           <SwitchMode />
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to="/dang-nhap">
           <UserIcon />
         </ListItem>
       </List>
