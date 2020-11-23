@@ -55,7 +55,7 @@ export default function ToggleMenu() {
   );
 
   return (
-    <>
+    <React.Fragment>
       <Button onClick={toggleDrawer(true)}>
         <MenuIcon />
       </Button>
@@ -66,6 +66,6 @@ export default function ToggleMenu() {
       >
         {list()}
       </Drawer>
-    </>
+    </React.Fragment>
   );
 }

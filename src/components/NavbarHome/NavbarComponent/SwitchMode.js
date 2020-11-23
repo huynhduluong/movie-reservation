@@ -16,7 +16,7 @@ export default function SwitchMode() {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
   return (
-    <>
+    <React.Fragment>
       <WbSunnyIcon color="action" />
       <Switch
         checked={state.switchMode}
@@ -25,6 +25,6 @@ export default function SwitchMode() {
         inputProps={{ "aria-label": "checkbox" }}
       />
       <Brightness2Icon color="action" />
-    </>
+    </React.Fragment>
   );
 }
