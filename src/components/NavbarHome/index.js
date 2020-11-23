@@ -16,7 +16,7 @@ import { useStyles } from "./NavbarStyle";
 export default function NavbarHome() {
   const classes = useStyles();
   return (
-    <>
+    <React.Fragment>
       <div className={classes.maxHeightNavbarHome}></div>
       <div>
         <AppBar position="fixed" className={classes.root}>
@@ -64,6 +64,6 @@ export default function NavbarHome() {
           </Toolbar>
         </AppBar>
       </div>
-    </>
+    </React.Fragment>
   );
 }

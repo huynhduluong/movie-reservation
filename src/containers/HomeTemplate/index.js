@@ -2,13 +2,19 @@ import React from "react";
 import { Route } from "react-router-dom";
 import FooterHome from "../../components/FooterHome";
 import NavbarHome from "../../components/NavbarHome";
+import DarkTheme from "../../theme/DarkTheme";
+import LightTheme from "../../theme/LightTheme";
+import { CssBaseline, ThemeProvider } from "@material-ui/core";
 
 function HomeLayout(props) {
   return (
     <div>
-      <NavbarHome />
-      {props.children}
-      <FooterHome />
+      <ThemeProvider theme={DarkTheme}>
+        <NavbarHome />
+        <CssBaseline />
+        {props.children}
+        <FooterHome />
+      </ThemeProvider>
     </div>
   );
 }
