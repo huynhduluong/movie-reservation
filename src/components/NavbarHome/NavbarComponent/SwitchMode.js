@@ -5,29 +5,35 @@ import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import { connect } from "react-redux";
 import { CHANGE_THEME_REQUEST } from "../modules/constant";
 
-//lưu vào localStorage để khi load page hoặc vào trang lại có thể lấy lại theme
-
 function SwitchMode(props) {
+  const { themeStatus, handleChangeTheme } = props;
   useEffect(() => {
     if (localStorage.getItem("themeStatus")) {
-      props.handleChangeTheme(JSON.parse(localStorage.getItem("themeStatus")));
+      handleChangeTheme(JSON.parse(localStorage.getItem("themeStatus")));
     } else {
-      localStorage.setItem("themeStatus", JSON.stringify(props.themeStatus));
+      localStorage.setItem("themeStatus", JSON.stringify(themeStatus));
     }
   }, []);
+
   const handleOnChange = (event) => {
     props.handleChangeTheme(event.target.checked);
   };
+
   return (
     <React.Fragment>
-      <WbSunnyIcon color="action" />
+      <WbSunnyIcon
+        style={themeStatus ? { color: "#0000008a" } : { color: "#f57c00" }}
+      />
       <Switch
         checked={props.themeStatus}
         onChange={handleOnChange}
         name="switchMode"
+        color="default"
         inputProps={{ "aria-label": "checkbox" }}
       />
-      <Brightness2Icon color="action" />
+      <Brightness2Icon
+        style={themeStatus ? { color: "#f57c00" } : { color: "#0000008a" }}
+      />
     </React.Fragment>
   );
 }

@@ -7,9 +7,10 @@ import LightTheme from "../../theme/LightTheme";
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
 
 function HomeLayout(props) {
+  console.log(props);
   return (
     <div>
-      <ThemeProvider theme={DarkTheme}>
+      <ThemeProvider theme={props.theme ? DarkTheme : LightTheme}>
         <NavbarHome />
         <CssBaseline />
         {props.children}
@@ -19,12 +20,12 @@ function HomeLayout(props) {
   );
 }
 
-export default function HomeTemplate({ Component, ...props }) {
+export default function HomeTemplate({ Component, theme, ...props }) {
   return (
     <Route
       {...props}
       render={(propsComponent) => (
-        <HomeLayout>
+        <HomeLayout theme={theme}>
           <Component {...propsComponent} />
         </HomeLayout>
       )}
