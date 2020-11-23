@@ -5,8 +5,10 @@ import HomeTemplate from "./containers/HomeTemplate";
 import LoginPage from "./containers/HomeTemplate/LoginPage";
 import PageNotFound from "./containers/PageNotFound";
 import { routesAdmin, routesHome } from "./routes";
+import { connect } from "react-redux";
 
-function App() {
+function App(props) {
+  const { themeStatus } = props;
   const showLayout = (routes, text) => {
     if (routes && routes.length > 0) {
       return routes.map((item, index) => {
@@ -15,6 +17,7 @@ function App() {
             key={index}
             exact={item.exact}
             path={item.path}
+            theme={themeStatus}
             Component={item.component}
           />
         ) : (
@@ -42,4 +45,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    themeStatus: state.changeThemeReducer.themeStatus,
+  };
+};
+
+export default connect(mapStateToProps)(App);
