@@ -6,6 +6,7 @@ import "./../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./../node_modules/jquery/dist/jquery.min";
 import "./../node_modules/popper.js/dist/umd/popper.min";
 import "./../node_modules/bootstrap/dist/js/bootstrap.min";
+import "./scss/index.scss";
 import reportWebVitals from "./reportWebVitals";
 import { applyMiddleware, compose, createStore } from "redux";
 import rootReducer from "./redux/reducer";

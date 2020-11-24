@@ -17,7 +17,7 @@ export const useStyles = makeStyles(() => ({
     cursor: "pointer",
   },
   maxHeightNavbarHome: {
-    height: "64px",
+    height: "60px",
   },
   menuButton: {
     marginRight: 0,
