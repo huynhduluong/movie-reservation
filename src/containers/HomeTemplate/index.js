@@ -7,7 +7,6 @@ import LightTheme from "../../theme/LightTheme";
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
 
 function HomeLayout(props) {
-  console.log(props);
   return (
     <div>
       <ThemeProvider theme={props.theme ? DarkTheme : LightTheme}>
