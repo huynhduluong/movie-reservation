@@ -56,7 +56,7 @@ export default function ToggleMenu() {
 
   return (
     <React.Fragment>
-      <Button onClick={toggleDrawer(true)}>
+      <Button onClick={toggleDrawer(true)} style={{ color: "black" }}>
         <MenuIcon />
       </Button>
       <Drawer

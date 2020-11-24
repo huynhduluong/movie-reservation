@@ -6,9 +6,22 @@ import LoginPage from "./containers/HomeTemplate/LoginPage";
 import PageNotFound from "./containers/PageNotFound";
 import { routesAdmin, routesHome } from "./routes";
 import { connect } from "react-redux";
+import { CHANGE_THEME_REQUEST } from "./components/NavbarHome/modules/constant";
+import { useEffect } from "react";
 
 function App(props) {
-  const { themeStatus } = props;
+  const { themeStatus, handleChangeTheme } = props;
+  useEffect(() => {
+    if (
+      JSON.parse(localStorage.getItem("themeStatus")) &&
+      JSON.parse(localStorage.getItem("themeStatus")) !== themeStatus
+    ) {
+      handleChangeTheme(JSON.parse(localStorage.getItem("themeStatus")));
+    } else {
+      localStorage.setItem("themeStatus", JSON.stringify(false));
+    }
+  }, []);
+
   const showLayout = (routes, text) => {
     if (routes && routes.length > 0) {
       return routes.map((item, index) => {
@@ -51,4 +64,18 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  const action = (status) => ({
+    type: CHANGE_THEME_REQUEST,
+    payload: status,
+  });
+
+  return {
+    handleChangeTheme: (status) => {
+      dispatch(action(status));
+      localStorage.setItem("themeStatus", JSON.stringify(status));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

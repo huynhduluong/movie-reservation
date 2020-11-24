@@ -7,16 +7,9 @@ import { CHANGE_THEME_REQUEST } from "../modules/constant";
 
 function SwitchMode(props) {
   const { themeStatus, handleChangeTheme } = props;
-  useEffect(() => {
-    if (localStorage.getItem("themeStatus")) {
-      handleChangeTheme(JSON.parse(localStorage.getItem("themeStatus")));
-    } else {
-      localStorage.setItem("themeStatus", JSON.stringify(themeStatus));
-    }
-  }, []);
 
   const handleOnChange = (event) => {
-    props.handleChangeTheme(event.target.checked);
+    handleChangeTheme(event.target.checked);
   };
 
   return (
@@ -38,7 +31,7 @@ function SwitchMode(props) {
   );
 }
 
-const mapStateToPros = (state) => {
+const mapStateToProps = (state) => {
   return {
     themeStatus: state.changeThemeReducer.themeStatus,
   };
@@ -57,4 +50,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToPros, mapDispatchToProps)(SwitchMode);
+export default connect(mapStateToProps, mapDispatchToProps)(SwitchMode);
