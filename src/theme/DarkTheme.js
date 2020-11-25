@@ -1,6 +1,18 @@
 import { createMuiTheme } from "@material-ui/core";
 
+export const overrides = {
+  MuiTab: {
+    // general overrides for your material tab component here
+    root: {
+      "&$selected": {
+        color: "#fb4226",
+      },
+    },
+  },
+};
+
 const DarkTheme = createMuiTheme({
+  overrides,
   palette: {
     primary: {
       main: "#E4E6Eb",
@@ -13,6 +25,9 @@ const DarkTheme = createMuiTheme({
     background: {
       paper: "#242527",
       default: "#18191a",
+    },
+    action: {
+      selected: "#fb4226",
     },
   },
   status: {

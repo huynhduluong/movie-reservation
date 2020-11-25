@@ -1,6 +1,8 @@
 import { createMuiTheme } from "@material-ui/core";
+import { overrides } from "./DarkTheme";
 
 const LightTheme = createMuiTheme({
+  overrides,
   palette: {
     text: {
       primary: "#000",
@@ -10,6 +12,9 @@ const LightTheme = createMuiTheme({
     background: {
       paper: "#fff",
       default: "#fff",
+    },
+    action: {
+      selected: "#fb4226",
     },
   },
   status: {

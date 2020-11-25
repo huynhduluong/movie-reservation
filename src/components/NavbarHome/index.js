@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  AppBar,
-  Avatar,
-  Box,
-  Hidden,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
+import { AppBar, Avatar, Box, Hidden, Toolbar } from "@material-ui/core";
 import ToggleMenu from "./NavbarComponent/ToggleMenu";
 import SwitchMode from "./NavbarComponent/SwitchMode";
 import UserIcon from "./NavbarComponent/UserIcon";
@@ -16,7 +9,7 @@ import { useStyles } from "./NavbarStyle";
 export default function NavbarHome() {
   const classes = useStyles();
   return (
-    <div>
+    <Hidden only="xs">
       <div className={classes.maxHeightNavbarHome}></div>
       <AppBar position="fixed" className={classes.root}>
         <Toolbar>
@@ -62,6 +55,6 @@ export default function NavbarHome() {
           </Box>
         </Toolbar>
       </AppBar>
-    </div>
+    </Hidden>
   );
 }
