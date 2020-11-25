@@ -4,6 +4,7 @@ import {
   Box,
   Divider,
   Grid,
+  Hidden,
   Link,
   makeStyles,
 } from "@material-ui/core";
@@ -66,7 +67,7 @@ const useStyles = makeStyles(() => ({
 export default function FooterHome() {
   const classes = useStyles();
   return (
-    <div className={classes.footer}>
+    <Hidden only="xs" className={classes.footer}>
       <div className={classes.container}>
         <Grid container>
           <Grid item xs={12} sm={4} m={2}>
@@ -324,6 +325,6 @@ export default function FooterHome() {
           SQUARE - HDL - TIX MOVIE RESERVATION CLONE
         </p>
       </div>
-    </div>
+    </Hidden>
   );
 }
