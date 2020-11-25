@@ -54,9 +54,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-// const TabStyle = styled(Tab)`
-
-// `;
 
 export default function MobileHome(props) {
   const classes = useStyles();

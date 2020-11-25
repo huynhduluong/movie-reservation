@@ -46,6 +46,7 @@ const carouselArr = [
   },
 ];
 
+//handle css by SCSS in scss folder
 export default function CarouselHome() {
   const renderSlide = () => {
     return carouselArr.map((item, index) => {
