@@ -9,6 +9,7 @@ import StarsIcon from "@material-ui/icons/Stars";
 import PersonalVideoIcon from "@material-ui/icons/PersonalVideo";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import SwitchMode from "../../../components/NavbarHome/NavbarComponent/SwitchMode";
+import Movie from "../../../components/Movie";
 
 const useStyles = makeStyles((theme) => ({
   appBarHome: {
@@ -53,6 +54,9 @@ const useStyles = makeStyles((theme) => ({
       outline: "none",
     },
   },
+  maxHeightApp: {
+    height: "72px",
+  },
 }));
 
 export default function MobileHome(props) {
@@ -89,7 +93,13 @@ export default function MobileHome(props) {
             <CarouselHome />
           </TabPanel>
           {/* Đang chiếu tab */}
-          <TabPanel value="2">Add thêm component film Đang chiếu</TabPanel>
+          <TabPanel value="2">
+            <Movie />
+            <Movie />
+            <Movie />
+            <Movie />
+            <Movie />
+          </TabPanel>
           {/* Sắp chiếu tabs */}
           <TabPanel value="3">Add thêm component film Sắp chiếu</TabPanel>
         </TabContext>
@@ -146,6 +156,7 @@ export default function MobileHome(props) {
           </TabList>
         </AppBar>
       </TabContext>
+      <div className={classes.maxHeightApp}></div>
     </React.Fragment>
   );
 }

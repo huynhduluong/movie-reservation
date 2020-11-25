@@ -9,13 +9,25 @@ export const overrides = {
       },
     },
   },
+  MuiTabPanel: {
+    root: {
+      padding: 0,
+    },
+  },
+  MuiCardContent: {
+    root: {
+      padding: 0,
+      paddingLeft: "15px",
+    },
+  },
 };
 
 const DarkTheme = createMuiTheme({
   overrides,
   palette: {
     primary: {
-      main: "#E4E6Eb",
+      main: "#FB4226",
+      contrastText: "#fff",
     },
     text: {
       primary: "#E4E6Eb",
