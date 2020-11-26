@@ -10,6 +10,9 @@ import PersonalVideoIcon from "@material-ui/icons/PersonalVideo";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import SwitchMode from "../../../components/NavbarHome/NavbarComponent/SwitchMode";
 import Movie from "../../../components/Movie";
+import WithCard from "../../../components/CardSmall/WithCard";
+import CardSmallFilm from "../../../components/CardSmall/CardSmallFilm";
+import CardSmallNews from "../../../components/CardSmall/CardSmallNews";
 
 const newsArray = [
   {
@@ -278,6 +281,8 @@ const newsArray = [
   },
 ];
 
+const CardSmall = WithCard(CardSmallNews);
+
 const useStyles = makeStyles((theme) => ({
   appBarHome: {
     top: "auto",
@@ -358,12 +363,17 @@ export default function MobileHome(props) {
           {/* Home */}
           <TabPanel value="1">
             <CarouselHome />
+            {newsArray.map((item) => {
+              return <CardSmall data={item} key={item.id} />;
+            })}
           </TabPanel>
+
           {/* Đang chiếu tab */}
           <TabPanel value="2">
             <Movie type="beingSold" />
             <Movie type="beingSold" />
           </TabPanel>
+
           {/* Sắp chiếu tabs */}
           <TabPanel value="3">
             <Movie />

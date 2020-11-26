@@ -35,7 +35,7 @@ export const movieStyles = makeStyles({
     padding: "5px",
     fontSize: "13px",
     lineHeight: 0,
-    minWidth: "none",
+    minWidth: 0,
     marginRight: "10px",
   },
   title: {
