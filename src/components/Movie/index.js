@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { Box, Button } from "@material-ui/core";
 import { movieStyles } from "./MovieStyle";
 
-export default function Movie() {
+export default function Movie(props) {
   const classes = movieStyles();
   return (
     <div>
@@ -19,39 +19,51 @@ export default function Movie() {
             title="Contemplative Reptile"
           />
           <div className={classes.overlay}></div>
-          <CardContent className={classes.content}>
-            <Box display="flex">
+          {props.type === "beingSold" ? (
+            <React.Fragment>
+              <CardContent className={classes.content}>
+                <Box display="flex">
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    className={classes.buttonAge}
+                  >
+                    C18
+                  </Button>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Đang chiếu
+                  </Typography>
+                </Box>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  color="textPrimary"
+                  component="h2"
+                  className={classes.title}
+                >
+                  Tiệc trăng máu
+                </Typography>
+              </CardContent>
               <Button
                 color="primary"
+                className={classes.ticketButton}
                 variant="contained"
-                className={classes.buttonAge}
               >
-                C18
+                Đặt vé
               </Button>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Đang chiếu
-              </Typography>
-            </Box>
-            <Typography
-              gutterBottom
-              variant="h5"
-              color="textPrimary"
-              component="h2"
-              className={classes.title}
-            >
-              Tiệc trăng máu
-            </Typography>
-          </CardContent>
-          <Button
-            color="primary"
-            className={classes.ticketButton}
-            variant="contained"
-          >
-            Đặt vé
-          </Button>
-          <Button variant="contained" className={classes.score}>
-            9.2
-          </Button>
+              <Button variant="contained" className={classes.score}>
+                9.2
+              </Button>
+            </React.Fragment>
+          ) : (
+            <Button variant="contained" className={classes.dayStart}>
+              04.12.2020
+            </Button>
+          )}
         </CardActionArea>
       </Card>
     </div>

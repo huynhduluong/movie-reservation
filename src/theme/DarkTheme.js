@@ -20,6 +20,11 @@ export const overrides = {
       paddingLeft: "15px",
     },
   },
+  MuiPaper: {
+    elevation1: {
+      boxShadow: "none",
+    },
+  },
 };
 
 const DarkTheme = createMuiTheme({
@@ -27,6 +32,10 @@ const DarkTheme = createMuiTheme({
   palette: {
     primary: {
       main: "#FB4226",
+      contrastText: "#fff",
+    },
+    secondary: {
+      main: "#00ac4d",
       contrastText: "#fff",
     },
     text: {
