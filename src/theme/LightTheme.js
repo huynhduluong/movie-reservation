@@ -4,6 +4,10 @@ import { overrides } from "./DarkTheme";
 const LightTheme = createMuiTheme({
   overrides,
   palette: {
+    primary: {
+      main: "#FB4226",
+      contrastText: "#fff",
+    },
     text: {
       primary: "#000",
       secondary: "#4a4a4a",
