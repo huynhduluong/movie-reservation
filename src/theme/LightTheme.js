@@ -23,6 +23,8 @@ const LightTheme = createMuiTheme({
   },
   status: {
     commentBackground: "#fff",
+    borderPaper: "20px",
   },
+  spacing: [0, 10, 15, 20, 25],
 });
 export default LightTheme;

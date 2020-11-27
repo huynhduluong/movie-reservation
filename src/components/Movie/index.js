@@ -10,7 +10,7 @@ import { movieStyles } from "./MovieStyle";
 export default function Movie(props) {
   const classes = movieStyles();
   return (
-    <div>
+    <React.Fragment>
       <Card className={classes.root}>
         <CardActionArea className={classes.actionArea}>
           <CardMedia
@@ -66,6 +66,6 @@ export default function Movie(props) {
           )}
         </CardActionArea>
       </Card>
-    </div>
+    </React.Fragment>
   );
 }

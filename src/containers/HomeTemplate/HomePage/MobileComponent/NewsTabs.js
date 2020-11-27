@@ -1,22 +1,10 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Tab from "@material-ui/core/Tab";
+import { AppBar, Paper, Tab } from "@material-ui/core";
 import { TabContext, TabList, TabPanel } from "@material-ui/lab";
-import CarouselHome from "../../../components/CarouselHome";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import StarsIcon from "@material-ui/icons/Stars";
-import PersonalVideoIcon from "@material-ui/icons/PersonalVideo";
-import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
-import SwitchMode from "../../../components/NavbarHome/NavbarComponent/SwitchMode";
-import Movie from "../../../components/Movie";
-import WithCard from "../../../components/CardSmall/WithCard";
-import CardSmallFilm from "../../../components/CardSmall/CardSmallFilm";
-import CardSmallNews from "../../../components/CardSmall/CardSmallNews";
-import CardNewsLarge from "../../../components/CardNewsLarge/CardNewsLarge";
-import { Paper, Typography } from "@material-ui/core";
-import NewsTabs from "./MobileComponent/NewsTabs";
-import { MobileHomeStyles } from "./MobileComponent/MobileHomeStyles";
+import React, { useState } from "react";
+import CardNewsLarge from "../../../../components/CardNewsLarge/CardNewsLarge";
+import CardSmallNews from "../../../../components/CardSmall/CardSmallNews";
+import WithCard from "../../../../components/CardSmall/WithCard";
+import { MobileHomeStyles } from "./MobileHomeStyles";
 
 const newsArray = {
   filmArr: [
@@ -269,197 +257,98 @@ const newsArray = {
 };
 
 const CardNews = WithCard(CardSmallNews);
-const CardFilm = WithCard(CardSmallFilm);
 
-export default function MobileHome(props) {
+const renderCardNewsLarge = (array) => {
+  // render 3 items CardNewsLarge
+  return array
+    .filter((item, index) => {
+      return index <= 2;
+    })
+    .map((item) => {
+      return <CardNewsLarge data={item} key={item.id} />;
+    });
+};
+
+const renderCardNews = (array) => {
+  //render all of CardNews
+  return array
+    .filter((item, index) => {
+      return index > 2;
+    })
+    .map((item) => {
+      return <CardNews data={item} key={item.id} />;
+    });
+};
+
+export default function NewsTabs() {
   const classes = MobileHomeStyles();
-  const [homeValue, setHomeValue] = useState("1");
-  const [discoverValue, setDiscoverValue] = useState("1");
-
-  const handleChangeHome = (event, newValue) => {
-    setHomeValue(newValue);
-  };
-  const handleChangeDiscoveryTab = (event, newValue) => {
-    setDiscoverValue(newValue);
+  const [newsValue, setNewsValue] = useState("1");
+  const handleChangeNewsTab = (event, newValue) => {
+    setNewsValue(newValue);
   };
 
-  //render discoveryTab
-  const renderDiscoveryTab = () => {
+  const renderTabLabel = (val) => {
+    let array = [];
+    switch (val) {
+      case 1:
+        array = newsArray.filmArr;
+        break;
+      case 2:
+        array = newsArray.reviewArr;
+        break;
+      case 3:
+        array = newsArray.promotionArr;
+        break;
+      default:
+        break;
+    }
     return (
       <React.Fragment>
-        <TabContext value={discoverValue}>
-          <AppBar position="static" className={classes.appBarDiscovery}>
-            <TabList
-              onChange={handleChangeDiscoveryTab}
-              aria-label="tabs discovery"
-              variant="fullWidth"
-              TabIndicatorProps={{ className: classes.indicatorTop }}
-            >
-              <Tab label="Home" value="1" className={classes.tabTop} />
-              <Tab label="Đang chiếu" value="2" className={classes.tabTop} />
-              <Tab label="Sắp chiếu" value="3" className={classes.tabTop} />
-            </TabList>
-          </AppBar>
-
-          {/* Home */}
-          <TabPanel value="1">
-            <CarouselHome />
-            <Typography
-              variant="body2"
-              color="textPrimary"
-              component="p"
-              className={classes.homeTitle}
-            >
-              Phim được yêu thích nhất
-            </Typography>
-            <Movie type="beingSold" />
-            <Movie type="beingSold" />
-            <Movie type="beingSold" />
-
-            {/* render 3 items of CardFilm  */}
-            <Paper className={classes.paperContainer}>
-              <Typography
-                variant="body2"
-                color="textPrimary"
-                component="p"
-                className={classes.paperTitle}
-              >
-                Rạp phim đang có gì
-              </Typography>
-              <CardFilm
-                data={{
-                  imageLink:
-                    "https://s3img.vcdn.vn/mobile/123phim/2020/10/tiec-trang-mau-blood-moon-party-16016226514166_215x318.png",
-                  title: "Tiệc trăng máu",
-                }}
-              />
-              <CardFilm
-                data={{
-                  imageLink:
-                    "https://s3img.vcdn.vn/mobile/123phim/2020/10/tiec-trang-mau-blood-moon-party-16016226514166_215x318.png",
-                  title: "Tiệc trăng máu",
-                }}
-              />
-              <CardFilm
-                data={{
-                  imageLink:
-                    "https://s3img.vcdn.vn/mobile/123phim/2020/10/tiec-trang-mau-blood-moon-party-16016226514166_215x318.png",
-                  title: "Tiệc trăng máu",
-                }}
-              />
-            </Paper>
-
-            <Typography
-              variant="body2"
-              color="textPrimary"
-              component="p"
-              className={classes.homeTitle}
-            >
-              Tin nóng nhất hôm nay
-            </Typography>
-
-            {/* render 3 items of CardNewsLarge */}
-            {newsArray.filmArr
-              .filter((item, index) => {
-                return index <= 2;
-              })
-              .map((item) => {
-                return <CardNewsLarge data={item} key={item.id} />;
-              })}
-
-            {/* render 5 items of CardNews  */}
-            <Paper className={classes.paperContainer}>
-              <Typography
-                variant="body2"
-                color="textPrimary"
-                component="p"
-                className={classes.paperTitle}
-              >
-                Lướt thêm tin mới nhé
-              </Typography>
-              {newsArray.promotionArr
-                .filter((item, index) => {
-                  return index <= 4;
-                })
-                .map((item) => {
-                  return <CardNews data={item} key={item.id} />;
-                })}
-            </Paper>
-          </TabPanel>
-
-          {/* Đang chiếu tab */}
-          <TabPanel value="2">
-            <Movie type="beingSold" />
-            <Movie type="beingSold" />
-          </TabPanel>
-
-          {/* Sắp chiếu tabs */}
-          <TabPanel value="3">
-            <Movie />
-            <Movie />
-            <Movie />
-            <Movie />
-          </TabPanel>
-        </TabContext>
+        {renderCardNewsLarge(array)}
+        <Paper className={classes.paperContainer}>
+          {renderCardNews(array)}
+        </Paper>
       </React.Fragment>
     );
   };
 
   return (
     <React.Fragment>
-      <TabContext value={homeValue}>
-        <TabPanel value="1" className={classes.tabPanel}>
-          {/* add layout khám phá
-            a navtabs with 3 tab: Home, Đang chiếu, Sắp chiếu
-        */}
-          {renderDiscoveryTab()}
-        </TabPanel>
-        <TabPanel value="2">Cụm rạp</TabPanel>
-        <TabPanel value="3">
-          {/* add layout khám phá
-            a navtabs with 3 tab: Điện ảnh, Đánh giá, Khuyến mãi
-        */}
-          <NewsTabs />
-        </TabPanel>
-        <TabPanel value="4">
-          <h1>Đăng nhập</h1>
-          <SwitchMode />
-        </TabPanel>
-        <AppBar position="fixed" className={classes.appBarHome}>
+      <TabContext value={newsValue}>
+        <AppBar position="static" className={classes.appBarDiscovery}>
           <TabList
-            onChange={handleChangeHome}
-            aria-label="home tabs"
+            onChange={handleChangeNewsTab}
+            aria-label="tabs discovery"
             variant="fullWidth"
-            TabIndicatorProps={{ className: classes.indicatorBottom }}
+            TabIndicatorProps={{ className: classes.indicatorTop }}
           >
-            <Tab
-              icon={<StarsIcon />}
-              label="Khám phá"
-              value="1"
-              className={classes.tabBottom}
-            />
-            <Tab
-              icon={<PersonalVideoIcon />}
-              label="Cụm rạp"
-              value="2"
-              className={classes.tabBottom}
-            />
-            <Tab
-              icon={<LibraryBooksIcon />}
-              label="Tin tức"
-              value="3"
-              className={classes.tabBottom}
-            />
-            <Tab
-              icon={<AccountCircleIcon />}
-              label="Tài Khoản"
-              value="4"
-              className={classes.tabBottom}
-            />
+            <Tab label="Điện ảnh 24h" value="1" className={classes.tabTop} />
+            <Tab label="Đánh giá" value="2" className={classes.tabTop} />
+            <Tab label="Khuyến mãi" value="3" className={classes.tabTop} />
           </TabList>
         </AppBar>
+
+        {/* Newstab */}
+        {newsValue === "1" ? (
+          <TabPanel value="1">{renderTabLabel(1)}</TabPanel>
+        ) : (
+          ""
+        )}
+
+        {/* Đánh giá tab */}
+        {newsValue === "2" ? (
+          <TabPanel value="2">{renderTabLabel(2)}</TabPanel>
+        ) : (
+          ""
+        )}
+
+        {/* Khuyến mãi tabs */}
+        {newsValue === "3" ? (
+          <TabPanel value="3">{renderTabLabel(3)}</TabPanel>
+        ) : (
+          ""
+        )}
       </TabContext>
-      <div className={classes.maxHeightApp}></div>
     </React.Fragment>
   );
 }

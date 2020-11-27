@@ -25,6 +25,11 @@ export const overrides = {
       boxShadow: "none",
     },
   },
+  MuiCardMedia: {
+    root: {
+      backgroundPosition: "top",
+    },
+  },
 };
 
 const DarkTheme = createMuiTheme({
@@ -53,7 +58,9 @@ const DarkTheme = createMuiTheme({
   },
   status: {
     commentBackground: "#3a3b3c",
+    borderPaper: "20px",
   },
+  spacing: [0, 10, 15, 20, 25],
 });
 
 export default DarkTheme;
