@@ -2,12 +2,13 @@ import React from "react";
 import { Box, Button, Typography, CardContent } from "@material-ui/core";
 import { WithCardStyles } from "./WithCardStyles";
 
-export default function CardSmallFilm() {
+export default function CardSmallFilm(props) {
   const classes = WithCardStyles();
+  const { item } = props;
   return (
     <CardContent className={classes.content}>
       <Typography component="h5" variant="h5" className={classes.filmTitle}>
-        Gia Đình Croods: Kỷ nguyên
+        {item.title}
       </Typography>
       <Box display="flex">
         <Button

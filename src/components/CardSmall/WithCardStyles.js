@@ -4,8 +4,6 @@ export const WithCardStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     margin: "10px 0px",
-    paddingLeft: "10px",
-    paddingRight: "10px",
   },
   details: {
     display: "flex",
@@ -24,7 +22,8 @@ export const WithCardStyles = makeStyles((theme) => ({
   },
   cover: {
     height: 0,
-    paddingTop: "100px",
+    paddingTop: "100%",
+    minWidth: "100px",
     borderRadius: "20px",
   },
   filmTitle: {

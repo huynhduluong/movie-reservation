@@ -2,12 +2,12 @@ import { makeStyles } from "@material-ui/core/styles";
 export const movieStyles = makeStyles({
   root: {
     margin: "15px",
-    height: "400px",
+    minHeight: "0px",
     borderRadius: "20px",
   },
   media: {
     height: 0,
-    paddingTop: "400px",
+    paddingTop: "100%",
     width: "100%",
   },
   actionArea: {
@@ -43,7 +43,7 @@ export const movieStyles = makeStyles({
     marginBottom: "25px",
     whiteSpace: "nowrap",
     overflow: "hidden",
-    textOverflow: "clip",
+    textOverflow: "ellipsis",
   },
   ticketButton: {
     position: "absolute",
