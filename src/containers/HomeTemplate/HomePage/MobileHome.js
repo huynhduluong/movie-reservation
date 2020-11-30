@@ -11,6 +11,7 @@ import NewsTabs from "./MobileComponent/NewsTabs";
 import { MobileHomeStyles } from "./MobileComponent/MobileHomeStyles";
 import DiscoveryTabs from "./MobileComponent/DiscoveryTabs";
 import CinemaTabs from "./MobileComponent/CinemaTabs";
+import { Typography } from "@material-ui/core";
 
 export default function MobileHome(props) {
   const classes = MobileHomeStyles();
@@ -27,20 +28,22 @@ export default function MobileHome(props) {
           {/* add layout khám phá
             a navtabs with 3 tab: Home, Đang chiếu, Sắp chiếu
         */}
+          <Typography className={classes.titleTabs}>Khám phá</Typography>
           <DiscoveryTabs />
         </TabPanel>
         <TabPanel value="2">
-          Cụm rạp
+          <Typography className={classes.titleTabs}>Rạp chiếu</Typography>
           <CinemaTabs />
         </TabPanel>
         <TabPanel value="3">
           {/* add layout khám phá
             a navtabs with 3 tab: Điện ảnh, Đánh giá, Khuyến mãi
         */}
+          <Typography className={classes.titleTabs}>Tin tức</Typography>
           <NewsTabs />
         </TabPanel>
         <TabPanel value="4">
-          <h1>Đăng nhập</h1>
+          <Typography className={classes.titleTabs}>Cá nhân</Typography>
           <SwitchMode />
         </TabPanel>
         <AppBar position="fixed" className={classes.appBarHome}>
