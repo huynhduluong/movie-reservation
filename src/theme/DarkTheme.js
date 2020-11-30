@@ -30,6 +30,28 @@ export const overrides = {
       backgroundPosition: "top",
     },
   },
+  MuiAccordion: {
+    root: {
+      "&$expanded": {
+        margin: 0,
+      },
+    },
+  },
+  MuiAccordionSummary: {
+    root: { minHeight: "64px" },
+    content: {
+      margin: "0",
+      "&$expanded": {
+        margin: "0",
+      },
+    },
+  },
+  MuiAccordionDetails: {
+    root: {
+      display: "block",
+      padding: "0px",
+    },
+  },
 };
 
 const DarkTheme = createMuiTheme({
