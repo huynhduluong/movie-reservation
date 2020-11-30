@@ -23,13 +23,13 @@ export default function Movie(props) {
             <React.Fragment>
               <CardContent className={classes.content}>
                 <Box display="flex">
-                  <Button
+                  {/* <Button
                     color="primary"
                     variant="contained"
                     className={classes.buttonAge}
                   >
                     C18
-                  </Button>
+                  </Button> */}
                   <Typography
                     variant="body2"
                     color="textSecondary"
@@ -48,7 +48,7 @@ export default function Movie(props) {
                   Tiệc trăng máu
                 </Typography>
               </CardContent>
-              <Button
+              {/* <Button
                 color="primary"
                 className={classes.ticketButton}
                 variant="contained"
@@ -57,12 +57,13 @@ export default function Movie(props) {
               </Button>
               <Button variant="contained" className={classes.score}>
                 9.2
-              </Button>
+              </Button> */}
             </React.Fragment>
           ) : (
-            <Button variant="contained" className={classes.dayStart}>
-              04.12.2020
-            </Button>
+            // <Button variant="contained" className={classes.dayStart}>
+            //   04.12.2020
+            // </Button>
+            <React.Fragment></React.Fragment>
           )}
         </CardActionArea>
       </Card>

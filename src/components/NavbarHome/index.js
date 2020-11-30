@@ -22,18 +22,18 @@ export default function NavbarHome() {
           <div className={classes.listNav}>
             <Hidden xsDown>
               <Box display="flex">
-                <Link href="#" className={classes.link}>
+                <a href="#" className={classes.link}>
                   Lịch chiếu
-                </Link>
-                <Link href="#" className={classes.link}>
+                </a>
+                <a href="#" className={classes.link}>
                   Cụm rạp
-                </Link>
-                <Link href="#" className={classes.link}>
+                </a>
+                <a href="#" className={classes.link}>
                   Tin tức
-                </Link>
-                <Link href="#" className={classes.link}>
+                </a>
+                <a href="#" className={classes.link}>
                   Ứng dụng
-                </Link>
+                </a>
               </Box>
             </Hidden>
           </div>
