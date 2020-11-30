@@ -14,6 +14,13 @@ export const MobileHomeStyles = makeStyles((theme) => ({
     padding: 0,
     opacity: 0.95,
   },
+  titleTabs: {
+    color: theme.palette.text.primary,
+    padding: theme.spacing(1),
+    paddingLeft: theme.spacing(3),
+    fontSize: "30px",
+    backgroundColor: theme.palette.background.paper,
+  },
   tabPanel: {
     padding: 0,
   },
@@ -57,5 +64,45 @@ export const MobileHomeStyles = makeStyles((theme) => ({
   },
   paperTitle: {
     fontSize: "16px",
+  },
+}));
+
+export const CinemaTabStyles = makeStyles((theme) => ({
+  cinemaLayout: {
+    width: "100%",
+  },
+  bgAccor: {
+    background: "transparent",
+    borderBottom: "1px solid rgba(255, 255, 255, 0.54)",
+  },
+  avatar: {
+    fontSize: theme.typography.pxToRem(15),
+    flexShrink: 0,
+    marginRight: "15px",
+  },
+  nameCinemaSystem: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.primary,
+    textTransform: "capitalize",
+  },
+  nameCinema: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.primary,
+  },
+  address: {
+    fontSize: theme.typography.pxToRem(13),
+    color: theme.palette.text.secondary,
+  },
+  expandIcon: {
+    color: "rgba(255, 255, 255, 0.54)",
+    transform: "rotate(0deg)",
+  },
+  cinemaItem: {
+    margin: "0px",
+    padding: "10px 20px",
+    borderBottom: "1px solid rgba(255, 255, 255, 0.54)",
   },
 }));
