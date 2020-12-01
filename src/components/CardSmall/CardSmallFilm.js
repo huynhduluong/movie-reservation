@@ -11,13 +11,7 @@ export default function CardSmallFilm(props) {
         {item.title}
       </Typography>
       <Box display="flex">
-        <Button
-          color="secondary"
-          variant="contained"
-          className={classes.ageLimitButton}
-        >
-          P
-        </Button>
+        <span className={classes.ageLimitButton}>C18</span>
         <Typography
           variant="subtitle1"
           color="textSecondary"
@@ -26,13 +20,7 @@ export default function CardSmallFilm(props) {
           0p
         </Typography>
       </Box>
-      <Button
-        color="primary"
-        variant="contained"
-        className={classes.ticketButton}
-      >
-        Đặt vé
-      </Button>
+      <span className={classes.ticketButton}>Đặt vé</span>
     </CardContent>
   );
 }

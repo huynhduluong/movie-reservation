@@ -30,6 +30,11 @@ export const overrides = {
       backgroundPosition: "top",
     },
   },
+  MuiCardActionArea: {
+    focusHighlight: {
+      opacity: "0!important",
+    },
+  },
   MuiAccordion: {
     root: {
       "&$expanded": {
@@ -81,6 +86,9 @@ const DarkTheme = createMuiTheme({
   status: {
     commentBackground: "#3a3b3c",
     borderPaper: "20px",
+  },
+  shape: {
+    borderRadius: "4px",
   },
   spacing: [0, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55],
 });
