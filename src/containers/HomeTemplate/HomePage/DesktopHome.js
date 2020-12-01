@@ -1,7 +1,7 @@
-import { Grid, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import React from "react";
 import CarouselHome from "../../../components/CarouselHome";
-import Movie from "../../../components/Movie";
+import CarouselMovie from "../../../components/CarouselMovie";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,21 +14,7 @@ export default function DesktopHome() {
   return (
     <React.Fragment>
       <CarouselHome />
-
-      <Grid container className={classes.root}>
-        <Grid item sm={3}>
-          <Movie />
-        </Grid>
-        <Grid item sm={3}>
-          <Movie />
-        </Grid>
-        <Grid item sm={3}>
-          <Movie />
-        </Grid>
-        <Grid item sm={3}>
-          <Movie />
-        </Grid>
-      </Grid>
+      <CarouselMovie />
     </React.Fragment>
   );
 }
