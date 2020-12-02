@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Typography, CardContent } from "@material-ui/core";
+import { Box, Typography, CardContent } from "@material-ui/core";
 import { WithCardStyles } from "./WithCardStyles";
 
 export default function CardSmallFilm(props) {

@@ -1,11 +1,11 @@
 import React from "react";
+import { WithCarouselStyle } from "./WithCarouselStyles";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { EffectCoverflow, Pagination } from "swiper";
 
 import "swiper/swiper.scss";
 import "swiper/components/effect-coverflow/effect-coverflow.scss";
 import "swiper/components/pagination/pagination.scss";
-import { makeStyles } from "@material-ui/core";
 
 //adjust properties of EffectCoverflow
 EffectCoverflow.params.coverflowEffect = {
@@ -157,38 +157,26 @@ const movieList = [
   },
 ];
 
-const useStyle = makeStyles((theme) => ({
-  root: {
-    background: theme.palette.background.default === "#fff" ? "#000" : "#fff",
-    color: theme.palette.background.default === "#fff" ? "#fff" : "#000",
-  },
-}));
-
-export default function CarouselMovie() {
-  const classes = useStyle();
-  return (
-    <div id="carousel__movie">
-      <Swiper
-        effect="coverflow"
-        slidesPerView="auto"
-        pagination
-        grabCursor
-        centeredSlides
-        coverflowEffect={{ rotate: 60 }}
-      >
-        {movieList.map((item, index) => {
-          return (
-            <SwiperSlide key={index} className={classes.root}>
-              <div className="imgBx">
-                <img src={item.hinhAnh} alt={item.biDanh} />
-              </div>
-              <div className="detail">
-                <h3>{item.tenPhim}</h3>
-              </div>
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
-    </div>
-  );
+export default function WithCarouselFilm(Component) {
+  return function () {
+    const classes = WithCarouselStyle();
+    return (
+      <div id="carousel__movie">
+        <Swiper
+          effect="coverflow"
+          slidesPerView="auto"
+          pagination={{ clickable: true }}
+          centeredSlides="true"
+        >
+          {movieList.map((item, index) => {
+            return (
+              <SwiperSlide key={index} className={classes.root}>
+                <Component item={item} />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </div>
+    );
+  };
 }

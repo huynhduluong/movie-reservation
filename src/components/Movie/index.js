@@ -4,7 +4,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import { Box, Button } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import { movieStyles } from "./MovieStyle";
 import { Link } from "react-router-dom";
 

@@ -57,6 +57,13 @@ export const overrides = {
       padding: "0px",
     },
   },
+  MuiDialog: {
+    paperScrollPaper: {
+      background: "transparent",
+      height: "80%",
+      boxShadow: "none",
+    },
+  },
 };
 
 const DarkTheme = createMuiTheme({

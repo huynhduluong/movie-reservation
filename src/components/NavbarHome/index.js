@@ -22,7 +22,7 @@ export default function NavbarHome() {
           <div className={classes.listNav}>
             <Hidden xsDown>
               <Box display="flex">
-                <a href="#" className={classes.link}>
+                <a href="#carouselTabFilm" className={classes.link}>
                   Lịch chiếu
                 </a>
                 <a href="#" className={classes.link}>
