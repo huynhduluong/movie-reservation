@@ -3,7 +3,6 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import { WithCarouselStyle } from "./WithCarouselStyles";
-import { Box } from "@material-ui/core";
 
 export default function CarouselFilmNow(props) {
   const classes = WithCarouselStyle();
@@ -48,6 +47,7 @@ export default function CarouselFilmNow(props) {
           <iframe
             width={"100%"}
             height={"100%"}
+            title={item.biDanh}
             src={item.trailer}
             frameBorder={0}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

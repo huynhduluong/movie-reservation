@@ -31,7 +31,7 @@ export default function NavbarHome() {
                 <a href="#" className={classes.link}>
                   Tin tức
                 </a>
-                <a href="#" className={classes.link}>
+                <a href="#appPromotion" className={classes.link}>
                   Ứng dụng
                 </a>
               </Box>
