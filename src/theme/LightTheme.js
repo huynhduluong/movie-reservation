@@ -13,6 +13,10 @@ const LightTheme = createMuiTheme({
       secondary: "#4a4a4a",
       disabled: "rgba(255, 255, 255, 0.5)",
     },
+    showTimeGreen: {
+      main: "rgba(246,246,246,.5)",
+      contrastText: "#108f3e",
+    },
     background: {
       paper: "#fff",
       default: "#fff",
@@ -22,8 +26,11 @@ const LightTheme = createMuiTheme({
     },
   },
   status: {
-    commentBackground: "#fff",
+    commentBackground: "#3a3b3c",
     borderPaper: "20px",
+    red: "#fb4226",
+    showTimeLight: "#9b9b9b",
+    borderColor: "#e4e4e4",
   },
   spacing: [0, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55],
 });

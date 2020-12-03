@@ -25,7 +25,7 @@ export default function NavbarHome() {
                 <a href="#carouselTabFilm" className={classes.link}>
                   Lịch chiếu
                 </a>
-                <a href="#" className={classes.link}>
+                <a href="#cumrap" className={classes.link}>
                   Cụm rạp
                 </a>
                 <a href="#" className={classes.link}>

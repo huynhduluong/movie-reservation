@@ -77,6 +77,10 @@ const DarkTheme = createMuiTheme({
       main: "#00ac4d",
       contrastText: "#fff",
     },
+    showTimeGreen: {
+      main: "transparent",
+      contrastText: "#108f3e",
+    },
     text: {
       primary: "#E4E6Eb",
       secondary: "#B0B3B8",
@@ -93,6 +97,9 @@ const DarkTheme = createMuiTheme({
   status: {
     commentBackground: "#3a3b3c",
     borderPaper: "20px",
+    red: "#fb4226",
+    showTimeLight: "#9b9b9b",
+    borderColor: "#e4e4e4",
   },
   shape: {
     borderRadius: "4px",
