@@ -1,44 +1,6 @@
 import { Avatar, Divider, List, ListItem, makeStyles } from "@material-ui/core";
-import React from "react";
-
-const cinemaArray = [
-  {
-    maHeThongRap: "BHDStar",
-    tenHeThongRap: "BHD Star Cineplex",
-    biDanh: "bhd-star-cineplex",
-    logo: "http://movie0706.cybersoft.edu.vn/hinhanh/bhd-star-cineplex.png",
-  },
-  {
-    maHeThongRap: "CGV",
-    tenHeThongRap: "cgv",
-    biDanh: "cgv",
-    logo: "http://movie0706.cybersoft.edu.vn/hinhanh/cgv.png",
-  },
-  {
-    maHeThongRap: "CineStar",
-    tenHeThongRap: "CineStar",
-    biDanh: "cinestar",
-    logo: "http://movie0706.cybersoft.edu.vn/hinhanh/cinestar.png",
-  },
-  {
-    maHeThongRap: "Galaxy",
-    tenHeThongRap: "Galaxy Cinema",
-    biDanh: "galaxy-cinema",
-    logo: "http://movie0706.cybersoft.edu.vn/hinhanh/galaxy-cinema.png",
-  },
-  {
-    maHeThongRap: "LotteCinima",
-    tenHeThongRap: "Lotte Cinema",
-    biDanh: "lotte-cinema",
-    logo: "http://movie0706.cybersoft.edu.vn/hinhanh/lotte-cinema.png",
-  },
-  {
-    maHeThongRap: "MegaGS",
-    tenHeThongRap: "MegaGS",
-    biDanh: "megags",
-    logo: "http://movie0706.cybersoft.edu.vn/hinhanh/megags.png",
-  },
-];
+import React, { useState } from "react";
+import { connect } from "react-redux";
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -54,14 +16,18 @@ const useStyle = makeStyles((theme) => ({
     padding: "20px",
     transition: "all 0.2s",
     cursor: "pointer",
-  },
-  avatar: {
-    width: "50px",
-    height: "50px",
     opacity: 0.5,
     "&:hover": {
       opacity: 1,
     },
+  },
+  listItemActive: {
+    background: "transparent!important",
+    opacity: 1,
+  },
+  avatar: {
+    width: "50px",
+    height: "50px",
   },
   divider: {
     backgroundColor: "#ebebec",
@@ -69,14 +35,29 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-export default function LogoCinema(props) {
+function LogoCinema(props) {
   const classes = useStyle();
-  return (
-    <List className={classes.root}>
-      {cinemaArray.map((logo, index) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+  };
+
+  const renderLogoCinema = () => {
+    const { listCinema } = props;
+    if (listCinema && listCinema.length > 0) {
+      return listCinema.map((logo, index) => {
         return (
           <React.Fragment key={index}>
-            <ListItem className={classes.listItem}>
+            <ListItem
+              className={
+                selectedIndex === index
+                  ? `${classes.listItemActive} ${classes.listItem}`
+                  : classes.listItem
+              }
+              selected={selectedIndex === index}
+              onClick={(event) => handleListItemClick(event, index)}
+            >
               <Avatar
                 alt={logo.tenHeThongRap}
                 src={logo.logo}
@@ -90,7 +71,21 @@ export default function LogoCinema(props) {
             />
           </React.Fragment>
         );
-      })}
-    </List>
-  );
+      });
+    }
+  };
+
+  return <List className={classes.root}>{renderLogoCinema()}</List>;
 }
+
+const mapStateToProps = (state) => {
+  return {
+    listCinema: state.listCinemaReducer.listCinema,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogoCinema);

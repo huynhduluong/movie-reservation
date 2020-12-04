@@ -64,6 +64,16 @@ export const overrides = {
       boxShadow: "none",
     },
   },
+  MuiListItem: {
+    root: {
+      Mui: {
+        selected: {
+          background: "transparent",
+          opacity: 1,
+        },
+      },
+    },
+  },
 };
 
 const DarkTheme = createMuiTheme({

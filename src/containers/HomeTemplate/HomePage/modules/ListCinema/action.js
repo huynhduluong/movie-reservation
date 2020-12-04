@@ -9,14 +9,15 @@ export const actListCinemaApi = () => {
   return (dispatch) => {
     actListCinemaRequest();
     Axios({
-      url: "",
+      url:
+        "https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinHeThongRap",
       method: "GET",
     })
       .then((result) => {
-        console.log("listCinema", result.data);
+        dispatch(actListCinemaSuccess(result.data));
       })
       .catch((err) => {
-        console.log("listCinema", err);
+        dispatch(actListCinemaFailed(err));
       });
   };
 };

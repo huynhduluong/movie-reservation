@@ -29,6 +29,9 @@ const useStyle = makeStyles((theme) => ({
       opacity: 1,
     },
   },
+  listItemActive: {
+    opacity: 1,
+  },
   avatar: {
     width: "50px",
     height: "50px",
