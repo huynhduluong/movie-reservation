@@ -167,6 +167,7 @@ export default function WithCarouselFilm(Component) {
           slidesPerView="auto"
           pagination={{ clickable: true }}
           centeredSlides="true"
+          loop="true"
         >
           {movieList.map((item, index) => {
             return (
