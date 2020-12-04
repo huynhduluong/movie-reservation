@@ -19,6 +19,7 @@ const useStyle = makeStyles((theme) => ({
     height: "705px",
     width: "100%",
     padding: "0px 20px",
+    background: theme.palette.background.paper,
   },
   listItem: {
     padding: "0px",
@@ -30,7 +31,7 @@ const useStyle = makeStyles((theme) => ({
   },
   avatar: {
     width: "50px",
-    height: "50px",
+    height: "70px",
   },
   itemText: {
     margin: 0,

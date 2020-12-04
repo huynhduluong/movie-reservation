@@ -17,6 +17,7 @@ const useStyle = makeStyles((theme) => ({
     width: "100%",
     padding: 0,
     overflowY: "hidden",
+    background: theme.palette.background.paper,
   },
   listItem: {
     padding: "20px",

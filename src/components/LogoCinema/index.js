@@ -48,6 +48,7 @@ const useStyle = makeStyles((theme) => ({
     borderTopLeftRadius: theme.shape.borderRadius,
     borderBottomLeftRadius: theme.shape.borderRadius,
     padding: 0,
+    background: theme.palette.background.paper,
   },
   listItem: {
     padding: "20px",

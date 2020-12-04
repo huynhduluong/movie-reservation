@@ -34,6 +34,7 @@ export const DesktopHomeStyle = makeStyles((theme) => ({
     width: "30%!important",
     borderTop: "1px solid #ebebec",
     borderBottom: "1px solid #ebebec",
+    background: theme.palette.background.paper,
   },
   showTimeScrollBar: {
     height: "705px!important",
@@ -41,5 +42,6 @@ export const DesktopHomeStyle = makeStyles((theme) => ({
     border: "1px solid #ebebec",
     borderTopRightRadius: theme.shape.borderRadius,
     borderBottomRightRadius: theme.shape.borderRadius,
+    background: theme.palette.background.paper,
   },
 }));
