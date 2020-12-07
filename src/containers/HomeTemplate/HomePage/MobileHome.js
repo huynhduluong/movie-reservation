@@ -24,28 +24,48 @@ export default function MobileHome(props) {
   return (
     <React.Fragment>
       <TabContext value={homeValue}>
-        <TabPanel value="1" className={classes.tabPanel}>
-          {/* add layout khám phá
+        {/* add layout khám phá
             a navtabs with 3 tab: Home, Đang chiếu, Sắp chiếu
         */}
-          <Typography className={classes.titleTabs}>Khám phá</Typography>
-          <DiscoveryTabs />
-        </TabPanel>
-        <TabPanel value="2">
-          <Typography className={classes.titleTabs}>Rạp chiếu</Typography>
-          <CinemaTabs />
-        </TabPanel>
-        <TabPanel value="3">
-          {/* add layout khám phá
+        {homeValue === "1" ? (
+          <TabPanel value="1" className={classes.tabPanel}>
+            <Typography className={classes.titleTabs}>Khám phá</Typography>
+            <DiscoveryTabs />
+          </TabPanel>
+        ) : (
+          <React.Fragment></React.Fragment>
+        )}
+
+        {homeValue === "2" ? (
+          <TabPanel value="2">
+            <Typography className={classes.titleTabs}>Rạp chiếu</Typography>
+            <CinemaTabs />
+          </TabPanel>
+        ) : (
+          <React.Fragment></React.Fragment>
+        )}
+
+        {/* add layout khám phá
             a navtabs with 3 tab: Điện ảnh, Đánh giá, Khuyến mãi
         */}
-          <Typography className={classes.titleTabs}>Tin tức</Typography>
-          <NewsTabs />
-        </TabPanel>
-        <TabPanel value="4">
-          <Typography className={classes.titleTabs}>Cá nhân</Typography>
-          <SwitchMode />
-        </TabPanel>
+        {homeValue === "3" ? (
+          <TabPanel value="3">
+            <Typography className={classes.titleTabs}>Tin tức</Typography>
+            <NewsTabs />
+          </TabPanel>
+        ) : (
+          <React.Fragment></React.Fragment>
+        )}
+
+        {homeValue === "4" ? (
+          <TabPanel value="4">
+            <Typography className={classes.titleTabs}>Cá nhân</Typography>
+            <SwitchMode />
+          </TabPanel>
+        ) : (
+          <React.Fragment></React.Fragment>
+        )}
+
         <AppBar position="fixed" className={classes.appBarHome}>
           <TabList
             onChange={handleChangeHome}
