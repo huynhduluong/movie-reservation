@@ -23,7 +23,7 @@
                     width: 100%;
                 }
                 .reviewScore{
-                    font-size: 16px;
+                    font-size: 10px;
                     background-color: rgba(12,27,54,.8);
                     border: 1px solid #1f2e46;
                     border-radius: 4px;
@@ -35,6 +35,10 @@
                     width: 54px;
                     text-align: center;
                     line-height: 1.1;
+                    .ratingNumber{
+                        font-size: 16px;
+                        transform: scaleY(1.2);
+                    }
                 }
                 .startDay{
                     font-size: 16px;

@@ -74,6 +74,12 @@ export const overrides = {
       },
     },
   },
+  MuiRating: {
+    root: {
+      fontSize: "10px",
+      color: "#fb4226",
+    },
+  },
 };
 
 const DarkTheme = createMuiTheme({
@@ -97,8 +103,10 @@ const DarkTheme = createMuiTheme({
       disabled: "rgba(255, 255, 255, 0.5)",
     },
     background: {
-      paper: "#242527",
-      default: "#18191a",
+      // paper: "#242527",
+      // default: "#18191a",
+      paper: "#091629",
+      default: "#0f1b35",
     },
     action: {
       selected: "#fb4226",

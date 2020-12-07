@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
-import { cinemaArr } from "../CinemaShowTime/CinemaSystem";
+import { connect } from "react-redux";
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -80,10 +80,11 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-export default function ShowTimeList() {
+function ShowTimeList(props) {
   const classes = useStyle();
-  const renderShowTime = (showTimeList) => {
-    return showTimeList
+  const { listShowTime } = props;
+  const renderShowTime = (listShowTimeItem) => {
+    return listShowTimeItem
       .filter((item) => {
         return new Date(item.ngayChieuGioChieu).getDate() === 1;
       })
@@ -106,66 +107,75 @@ export default function ShowTimeList() {
 
   return (
     <List className={classes.root}>
-      {cinemaArr[0].lstCumRap[0].danhSachPhim.map((film, index) => {
-        return (
-          <React.Fragment key={index}>
-            <ListItem alignItems="flex-start" className={classes.listItem}>
-              <ListItemAvatar>
-                <Avatar
-                  variant="square"
-                  alt={film.tenPhim}
-                  src={film.hinhAnh}
-                  className={classes.avatar}
+      {listShowTime &&
+        listShowTime.map((film, index) => {
+          return (
+            <React.Fragment key={index}>
+              <ListItem alignItems="flex-start" className={classes.listItem}>
+                <ListItemAvatar>
+                  <Avatar
+                    variant="square"
+                    alt={film.tenPhim}
+                    src={film.hinhAnh}
+                    className={classes.avatar}
+                  />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={
+                    <React.Fragment>
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        color="textPrimary"
+                      >
+                        {film.tenPhim}
+                      </Typography>
+                    </React.Fragment>
+                  }
+                  secondary={
+                    <React.Fragment>
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.address}
+                        color="textSecondary"
+                      >
+                        <span className={classes.ageLimit}>C18</span>
+                        100 phút - TIX
+                      </Typography>
+                    </React.Fragment>
+                  }
+                  className={classes.itemText}
                 />
-              </ListItemAvatar>
-              <ListItemText
-                primary={
-                  <React.Fragment>
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      color="textPrimary"
-                    >
-                      {film.tenPhim}
-                    </Typography>
-                  </React.Fragment>
-                }
-                secondary={
-                  <React.Fragment>
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.address}
-                      color="textSecondary"
-                    >
-                      <span className={classes.ageLimit}>C18</span>
-                      100 phút - TIX
-                    </Typography>
-                  </React.Fragment>
-                }
-                className={classes.itemText}
+              </ListItem>
+              <div>
+                <Typography
+                  component="p"
+                  color="textPrimary"
+                  style={{ marginBottom: "10px" }}
+                >
+                  2D Digital
+                </Typography>
+                <Box display="flex" flexWrap="wrap">
+                  {renderShowTime(film.lstLichChieuTheoPhim)}
+                </Box>
+              </div>
+              <Divider
+                // variant="middle"
+                component="li"
+                className={classes.divider}
               />
-            </ListItem>
-            <div>
-              <Typography
-                component="p"
-                color="textPrimary"
-                style={{ marginBottom: "10px" }}
-              >
-                2D Digital
-              </Typography>
-              <Box display="flex" flexWrap="wrap">
-                {renderShowTime(film.lstLichChieuTheoPhim)}
-              </Box>
-            </div>
-            <Divider
-              // variant="middle"
-              component="li"
-              className={classes.divider}
-            />
-          </React.Fragment>
-        );
-      })}
+            </React.Fragment>
+          );
+        })}
     </List>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    listShowTime: state.listShowTimeReducer.listShowTime,
+  };
+};
+
+export default connect(mapStateToProps)(ShowTimeList);

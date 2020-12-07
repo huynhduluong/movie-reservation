@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CarouselFilmComing from "../../../../components/CarouselMovie/CarouselFilmComing";
 import CarouselFilmNow from "../../../../components/CarouselMovie/CarouselFilmNow";
 import WithCarouselFilm from "../../../../components/CarouselMovie/WithCarouselFilm";
@@ -14,27 +14,12 @@ const FilmComing = WithCarouselFilm(CarouselFilmComing);
 
 function CarouselFilmTab(props) {
   const classes = DesktopHomeStyle();
-
-  let value = props.carouselStatus || "now";
+  const [value, setValue] = useState("now");
 
   const handleChange = (event, newValue) => {
-    props.changeCarousel(newValue);
-  };
-
-  //renderCarousel coming or now follow by value
-  const renderCarousel = (value) => {
-    if (value === "now") {
-      return (
-        <TabPanel value="now">
-          <FilmNow listMovie={props.listMovie} />
-        </TabPanel>
-      );
-    } else {
-      return (
-        <TabPanel value="coming">
-          <FilmComing listMovie={props.listMovie} />
-        </TabPanel>
-      );
+    setValue(newValue);
+    if (!props.listMovieComing) {
+      props.changeCarousel(newValue);
     }
   };
 
@@ -61,7 +46,12 @@ function CarouselFilmTab(props) {
             }
           />
         </Tabs>
-        {renderCarousel(value)}
+        <TabPanel value="now">
+          <FilmNow listMovie={props.listMovieNow} />
+        </TabPanel>
+        <TabPanel value="coming">
+          <FilmComing listMovie={props.listMovieComing} />
+        </TabPanel>
       </TabContext>
     </div>
   );
@@ -77,8 +67,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    listMovie: state.listMovieReducer.listMovie,
-    carouselStatus: state.listMovieReducer.carouselStatus,
+    listMovieNow: state.listMovieReducer.listMovieNow,
+    listMovieComing: state.listMovieReducer.listMovieComing,
   };
 };
 

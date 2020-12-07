@@ -3,6 +3,7 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import { WithCarouselStyle } from "./WithCarouselStyles";
+import RatingStar from "../RatingStar";
 
 export default function CarouselFilmNow(props) {
   const classes = WithCarouselStyle();
@@ -16,6 +17,7 @@ export default function CarouselFilmNow(props) {
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <React.Fragment>
       <div className="imgBx">
@@ -24,7 +26,11 @@ export default function CarouselFilmNow(props) {
         <div className="playButton" onClick={handleClickOpen}>
           <PlayArrowIcon className="playIcon" />
         </div>
-        <div className="reviewScore">{item.danhGia}</div>
+        <div className="reviewScore">
+          <span className="ratingNumber">{item.danhGia}</span>
+
+          <RatingStar number={parseFloat(item.danhGia)} />
+        </div>
       </div>
       <div className="detail">
         <div className="filmTitle">

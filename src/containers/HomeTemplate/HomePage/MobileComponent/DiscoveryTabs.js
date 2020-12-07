@@ -1,24 +1,88 @@
 import { AppBar, Paper, Tab, Typography } from "@material-ui/core";
 import { TabContext, TabList, TabPanel } from "@material-ui/lab";
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import CardNewsLarge from "../../../../components/CardNewsLarge/CardNewsLarge";
 import CardSmallFilm from "../../../../components/CardSmall/CardSmallFilm";
 import CardSmallNews from "../../../../components/CardSmall/CardSmallNews";
 import WithCard from "../../../../components/CardSmall/WithCard";
 import CarouselHome from "../../../../components/CarouselHome";
 import Movie from "../../../../components/Movie";
+import { actListMovieApi } from "../modules/ListMovie/action";
 import { newsArray } from "../NewsArray";
 import { MobileHomeStyles } from "./MobileHomeStyles";
 
 const CardNews = WithCard(CardSmallNews);
 const CardFilm = WithCard(CardSmallFilm);
 
-export default function DiscoveryTabs() {
+function DiscoveryTabs(props) {
+  const { listMovieComing, listMovieNow } = props;
   const classes = MobileHomeStyles();
   const [discoverValue, setDiscoverValue] = useState("1");
   const handleChangeDiscoveryTab = (event, newValue) => {
     setDiscoverValue(newValue);
+    if (newValue === "3" && !listMovieComing) {
+      props.changeFilmTab("coming");
+    }
   };
+
+  const renderListMovie = (movieArr, type) => {
+    if (movieArr) {
+      return movieArr.map((item) => {
+        return <Movie type={type} movie={item} key={item.maPhim} />;
+      });
+    }
+  };
+  const renderMovieSmall = (movieArr) => {
+    return movieArr.map((item, index) => {
+      return (
+        <CardFilm
+          data={{
+            imageLink: item.hinhAnh,
+            title: item.tenPhim,
+            rating: item.danhGia,
+          }}
+          key={index}
+        />
+      );
+    });
+  };
+
+  const renderFilmHome = () => {
+    if (!listMovieNow) {
+      return;
+    }
+    let movieLargeArr = listMovieNow.slice(0, 3);
+    let movieSmallArr = listMovieNow.slice(3, 6);
+    return (
+      <React.Fragment>
+        <Typography
+          variant="body2"
+          color="textPrimary"
+          component="p"
+          className={classes.homeTitle}
+        >
+          Phim được yêu thích nhất
+        </Typography>
+        {/* render 3 movieLarge */}
+        {renderListMovie(movieLargeArr, "beingSold")}
+
+        <Paper className={classes.paperContainer}>
+          <Typography
+            variant="body2"
+            color="textPrimary"
+            component="p"
+            className={classes.paperTitle}
+          >
+            Rạp phim đang có gì
+          </Typography>
+          {/* render 3 cardSmall */}
+          {renderMovieSmall(movieSmallArr)}
+        </Paper>
+      </React.Fragment>
+    );
+  };
+
   return (
     <React.Fragment>
       <TabContext value={discoverValue}>
@@ -36,105 +100,86 @@ export default function DiscoveryTabs() {
         </AppBar>
 
         {/* Home */}
-        <TabPanel value="1">
-          <CarouselHome />
-          <Typography
-            variant="body2"
-            color="textPrimary"
-            component="p"
-            className={classes.homeTitle}
-          >
-            Phim được yêu thích nhất
-          </Typography>
-          <Movie type="beingSold" />
-          <Movie type="beingSold" />
-          <Movie type="beingSold" />
-
-          {/* render 3 items of CardFilm  */}
-          <Paper className={classes.paperContainer}>
+        {discoverValue === "1" ? (
+          <TabPanel value="1">
+            <CarouselHome />
+            {renderFilmHome()}
             <Typography
               variant="body2"
               color="textPrimary"
               component="p"
-              className={classes.paperTitle}
+              className={classes.homeTitle}
             >
-              Rạp phim đang có gì
+              Tin nóng nhất hôm nay
             </Typography>
-            <CardFilm
-              data={{
-                imageLink:
-                  "https://s3img.vcdn.vn/mobile/123phim/2020/10/tiec-trang-mau-blood-moon-party-16016226514166_215x318.png",
-                title: "Tiệc trăng máu",
-              }}
-            />
-            <CardFilm
-              data={{
-                imageLink:
-                  "https://s3img.vcdn.vn/mobile/123phim/2020/10/tiec-trang-mau-blood-moon-party-16016226514166_215x318.png",
-                title: "Tiệc trăng máu",
-              }}
-            />
-            <CardFilm
-              data={{
-                imageLink:
-                  "https://s3img.vcdn.vn/mobile/123phim/2020/10/tiec-trang-mau-blood-moon-party-16016226514166_215x318.png",
-                title: "Tiệc trăng máu",
-              }}
-            />
-          </Paper>
 
-          <Typography
-            variant="body2"
-            color="textPrimary"
-            component="p"
-            className={classes.homeTitle}
-          >
-            Tin nóng nhất hôm nay
-          </Typography>
-
-          {/* render 3 items of CardNewsLarge */}
-          {newsArray.filmArr
-            .filter((item, index) => {
-              return index <= 2;
-            })
-            .map((item) => {
-              return <CardNewsLarge data={item} key={item.id} />;
-            })}
-
-          {/* render 5 items of CardNews  */}
-          <Paper className={classes.paperContainer}>
-            <Typography
-              variant="body2"
-              color="textPrimary"
-              component="p"
-              className={classes.paperTitle}
-            >
-              Lướt thêm tin mới nhé
-            </Typography>
-            {newsArray.promotionArr
+            {/* render 3 items of CardNewsLarge */}
+            {newsArray.filmArr
               .filter((item, index) => {
-                return index <= 4;
+                return index <= 2;
               })
               .map((item) => {
-                return <CardNews data={item} key={item.id} />;
+                return <CardNewsLarge data={item} key={item.id} />;
               })}
-          </Paper>
-        </TabPanel>
+
+            {/* render 5 items of CardNews  */}
+            <Paper className={classes.paperContainer}>
+              <Typography
+                variant="body2"
+                color="textPrimary"
+                component="p"
+                className={classes.paperTitle}
+              >
+                Lướt thêm tin mới nhé
+              </Typography>
+              {newsArray.promotionArr
+                .filter((item, index) => {
+                  return index <= 4;
+                })
+                .map((item) => {
+                  return <CardNews data={item} key={item.id} />;
+                })}
+            </Paper>
+          </TabPanel>
+        ) : (
+          ""
+        )}
 
         {/* Đang chiếu tab */}
-        <TabPanel value="2">
-          <Movie type="beingSold" />
-          <Movie type="beingSold" />
-        </TabPanel>
+        {discoverValue === "2" ? (
+          <TabPanel value="2">
+            {renderListMovie(listMovieNow, "beingSold")}
+          </TabPanel>
+        ) : (
+          ""
+        )}
 
         {/* Sắp chiếu tabs */}
-        <TabPanel value="3">
-          <Movie />
-          <Movie />
-          <Movie />
-          <Movie />
-        </TabPanel>
+        {discoverValue === "3" ? (
+          <TabPanel value="3">
+            {renderListMovie(listMovieComing, "coming")}
+          </TabPanel>
+        ) : (
+          ""
+        )}
       </TabContext>
     </React.Fragment>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeFilmTab: (filmTabStatus) => {
+      dispatch(actListMovieApi(filmTabStatus));
+    },
+  };
+};
+
+const mapStateToProps = (state) => {
+  return {
+    listMovieNow: state.listMovieReducer.listMovieNow,
+    listMovieComing: state.listMovieReducer.listMovieComing,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DiscoveryTabs);

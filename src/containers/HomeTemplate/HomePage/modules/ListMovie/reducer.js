@@ -6,9 +6,9 @@ import {
 
 let initialState = {
   loading: false,
-  listMovie: null,
+  listMovieNow: null,
+  listMovieComing: null,
   err: null,
-  carouselStatus: "now",
 };
 
 const listMovieReducer = (state = initialState, action) => {
@@ -20,8 +20,11 @@ const listMovieReducer = (state = initialState, action) => {
       return { ...state };
     case LIST_MOVIE_SUCCESS:
       state.loading = false;
-      state.listMovie = action.payload;
-      state.carouselStatus = action.filmType;
+      if (action.filmType === "now") {
+        state.listMovieNow = action.payload;
+      } else {
+        state.listMovieComing = action.payload;
+      }
       state.err = null;
       return { ...state };
     case LIST_MOVIE_FAILED:

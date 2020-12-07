@@ -17,7 +17,7 @@ export default function CardSmallFilm(props) {
           color="textSecondary"
           className={classes.timeFilm}
         >
-          0p
+          0p - TIX {item.rating}
         </Typography>
       </Box>
       <span className={classes.ticketButton}>Đặt vé</span>

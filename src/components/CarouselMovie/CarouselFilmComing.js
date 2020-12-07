@@ -12,7 +12,7 @@ export default function CarouselFilmComing(props) {
           <PlayArrowIcon className="playIcon" />
         </div> */}
         <div className="startDay">
-          {new Date(item.ngayKhoiChieu).toLocaleDateString("vn-VN", {
+          {new Date(item.ngayKhoiChieu).toLocaleDateString("vi", {
             month: "2-digit",
             day: "2-digit",
           })}

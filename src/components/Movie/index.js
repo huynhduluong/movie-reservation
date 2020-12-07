@@ -7,9 +7,11 @@ import Typography from "@material-ui/core/Typography";
 import { Box } from "@material-ui/core";
 import { movieStyles } from "./MovieStyle";
 import { Link } from "react-router-dom";
+import RatingStar from "../RatingStar";
 
 export default function Movie(props) {
   const classes = movieStyles();
+  const { movie, type } = props;
   return (
     <React.Fragment>
       <Card className={classes.root}>
@@ -20,11 +22,11 @@ export default function Movie(props) {
         >
           <CardMedia
             className={classes.media}
-            image="https://s3img.vcdn.vn/mobile/123phim/2020/10/tiec-trang-mau-blood-moon-party-16016226514166_215x318.png"
+            image={movie.hinhAnh}
             title="Contemplative Reptile"
           />
           <div className={classes.overlay}></div>
-          {props.type === "beingSold" ? (
+          {type === "beingSold" ? (
             <React.Fragment>
               <CardContent className={classes.content}>
                 <Box display="flex">
@@ -33,7 +35,7 @@ export default function Movie(props) {
                     variant="body2"
                     color="textSecondary"
                     component="p"
-                    style={{ textTransform: "uppercase" }}
+                    style={{ textTransform: "uppercase", color: "#fff" }}
                   >
                     Đang chiếu
                   </Typography>
@@ -45,15 +47,23 @@ export default function Movie(props) {
                   component="h2"
                   className={classes.title}
                 >
-                  Tiệc trăng máu
+                  {movie.tenPhim}
                 </Typography>
               </CardContent>
               <span className={classes.ticketButton}>Đặt vé</span>
-              <span className={classes.score}>9.2</span>
+              <span className={classes.score}>
+                {movie.danhGia}
+                <RatingStar number={parseFloat(movie.danhGia)} />
+              </span>
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <span className={classes.dayStart}>04.12.2020</span>
+              <span className={classes.dayStart}>
+                {new Date(movie.ngayKhoiChieu).toLocaleDateString("VI", {
+                  day: "2-digit",
+                  month: "2-digit",
+                })}
+              </span>
             </React.Fragment>
           )}
         </CardActionArea>

@@ -4,12 +4,13 @@ import MobileHome from "./MobileHome";
 import DesktopHome from "./DesktopHome";
 import { actListMovieApi } from "./modules/ListMovie/action";
 import { connect } from "react-redux";
-import { actListCinemaApi } from "./modules/ListCinema/action";
+import { actListShowTimeApi } from "./modules/ListShowTime/action";
 
 function HomePage(props) {
   useEffect(() => {
     props.listMovieApi();
-    props.listCinemaApi();
+    props.listShowTimeApi();
+    // props.listCinemaApi();
   }, []);
   if (isWidthUp("sm", props.width)) {
     return <DesktopHome />;
@@ -23,8 +24,8 @@ const mapDispatchToProps = (dispatch) => {
     listMovieApi: () => {
       dispatch(actListMovieApi("now"));
     },
-    listCinemaApi: () => {
-      dispatch(actListCinemaApi());
+    listShowTimeApi: () => {
+      dispatch(actListShowTimeApi());
     },
   };
 };

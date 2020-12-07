@@ -18,8 +18,10 @@ const LightTheme = createMuiTheme({
       contrastText: "#108f3e",
     },
     background: {
-      paper: "#fff",
-      default: "#fff",
+      // paper: "#fff",
+      // default: "#fff",
+      paper: "#fdfdfb",
+      default: "#f3f3f3",
     },
     action: {
       selected: "#fb4226",

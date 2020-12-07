@@ -50,6 +50,7 @@ export const movieStyles = makeStyles((theme) => ({
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
+    color: "#fff",
   },
   ticketButton: {
     position: "absolute",
@@ -78,7 +79,7 @@ export const movieStyles = makeStyles((theme) => ({
     textAlign: "center",
     lineHeight: 1.1,
     position: "absolute",
-    padding: "5px",
+    padding: "0px",
     fontSize: "16px",
     borderRadius: theme.shape.borderRadius,
   },

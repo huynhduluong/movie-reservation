@@ -1,6 +1,7 @@
 import { Avatar, Divider, List, ListItem, makeStyles } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { actChangeCinemaList } from "../../containers/HomeTemplate/HomePage/modules/ListShowTime/action";
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -41,12 +42,13 @@ function LogoCinema(props) {
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
+    props.changeListCinema(index);
   };
 
   const renderLogoCinema = () => {
-    const { listCinema } = props;
-    if (listCinema && listCinema.length > 0) {
-      return listCinema.map((logo, index) => {
+    const { listLogo } = props;
+    if (listLogo && listLogo.length > 0) {
+      return listLogo.map((logo, index) => {
         return (
           <React.Fragment key={index}>
             <ListItem
@@ -58,11 +60,7 @@ function LogoCinema(props) {
               selected={selectedIndex === index}
               onClick={(event) => handleListItemClick(event, index)}
             >
-              <Avatar
-                alt={logo.tenHeThongRap}
-                src={logo.logo}
-                className={classes.avatar}
-              />
+              <Avatar alt={logo} src={logo} className={classes.avatar} />
             </ListItem>
             <Divider
               variant="middle"
@@ -80,12 +78,16 @@ function LogoCinema(props) {
 
 const mapStateToProps = (state) => {
   return {
-    listCinema: state.listCinemaReducer.listCinema,
+    listLogo: state.listShowTimeReducer.listLogo,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    changeListCinema: (cinemaIndex) => {
+      dispatch(actChangeCinemaList(cinemaIndex));
+    },
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogoCinema);
