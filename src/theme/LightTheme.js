@@ -33,6 +33,7 @@ const LightTheme = createMuiTheme({
     red: "#fb4226",
     showTimeLight: "#9b9b9b",
     borderColor: "#e4e4e4",
+    bgDetailFilm: "#f3f3f3",
   },
   spacing: [0, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55],
 });

@@ -29,7 +29,7 @@ export default function CarouselFilmNow(props) {
         <div className="reviewScore">
           <span className="ratingNumber">{item.danhGia}</span>
 
-          <RatingStar number={parseFloat(item.danhGia)} />
+          <RatingStar>{parseFloat(item.danhGia)}</RatingStar>
         </div>
       </div>
       <div className="detail">

@@ -80,6 +80,11 @@ export const overrides = {
       color: "#fb4226",
     },
   },
+  MuiCircularProgress: {
+    colorPrimary: {
+      color: "#7ed321",
+    },
+  },
 };
 
 const DarkTheme = createMuiTheme({
@@ -118,6 +123,7 @@ const DarkTheme = createMuiTheme({
     red: "#fb4226",
     showTimeLight: "#9b9b9b",
     borderColor: "#e4e4e4",
+    bgDetailFilm: "rgb(10,32,41)",
   },
   shape: {
     borderRadius: "4px",

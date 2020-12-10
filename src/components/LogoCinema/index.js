@@ -1,4 +1,12 @@
-import { Avatar, Divider, List, ListItem, makeStyles } from "@material-ui/core";
+import {
+  Avatar,
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { actChangeCinemaList } from "../../containers/HomeTemplate/HomePage/modules/ListShowTime/action";
@@ -6,7 +14,7 @@ import { actChangeCinemaList } from "../../containers/HomeTemplate/HomePage/modu
 const useStyle = makeStyles((theme) => ({
   root: {
     height: "705px",
-    width: "92px",
+    minWidth: "92px",
     border: "1px solid #ebebec",
     borderTopLeftRadius: theme.shape.borderRadius,
     borderBottomLeftRadius: theme.shape.borderRadius,
@@ -61,6 +69,24 @@ function LogoCinema(props) {
               onClick={(event) => handleListItemClick(event, index)}
             >
               <Avatar alt={logo} src={logo} className={classes.avatar} />
+              {props.detailPage ? (
+                <ListItemText
+                  primary={
+                    <React.Fragment>
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        color="textPrimary"
+                        style={{ marginLeft: "10px" }}
+                      >
+                        BHD
+                      </Typography>
+                    </React.Fragment>
+                  }
+                />
+              ) : (
+                <React.Fragment></React.Fragment>
+              )}
             </ListItem>
             <Divider
               variant="middle"

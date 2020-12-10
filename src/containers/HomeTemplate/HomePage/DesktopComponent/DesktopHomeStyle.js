@@ -6,6 +6,7 @@ export const DesktopHomeStyle = makeStyles((theme) => ({
   },
   tabNormal: {
     backgroundColor: "transparent",
+    textTransform: "capitalize",
     border: "none",
     transition: "all .2s",
     lineHeight: "24px",
@@ -17,6 +18,7 @@ export const DesktopHomeStyle = makeStyles((theme) => ({
   },
   tabActive: {
     backgroundColor: "transparent",
+    textTransform: "capitalize",
     border: "none",
     transition: "all .2s",
     lineHeight: "24px",
