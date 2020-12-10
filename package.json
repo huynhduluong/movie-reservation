@@ -27,7 +27,7 @@
     "swiper": "^6.3.5",
     "web-vitals": "^0.2.4"
   },
-  "homepage": "https://huynhduluong.github.io/movie-reservation",
+  "homepage": "https://huynhduluong.github.io/movie-reservation/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
