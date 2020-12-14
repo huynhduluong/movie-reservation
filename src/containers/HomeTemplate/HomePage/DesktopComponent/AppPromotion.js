@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
   maxWidth: {
     maxWidth: "940px",
     margin: "auto",
+    width: "90%",
   },
   gridItem: {
     paddingTop: "60px",
@@ -43,14 +44,7 @@ export default function AppPromotion() {
                   component="p"
                   className={classes.title}
                 >
-                  Ứng dụng tiện lợi dành cho
-                </Typography>
-                <Typography
-                  variant="body1"
-                  component="p"
-                  className={classes.title}
-                >
-                  người yêu điện ảnh
+                  Ứng dụng tiện lợi dành cho người yêu điện ảnh
                 </Typography>
                 <br />
                 <Typography

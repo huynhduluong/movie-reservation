@@ -35,7 +35,7 @@ export const useStyles = makeStyles(() => ({
   },
   navRight: {
     position: "absolute",
-    right: "24px",
+    right: 0,
     top: 0,
     height: "64px",
   },

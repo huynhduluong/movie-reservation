@@ -9,6 +9,12 @@ export const overrides = {
       },
     },
   },
+  MuiToolbar: {
+    gutters: {
+      paddingLeft: "0px!important",
+      paddingRight: "0px!important",
+    },
+  },
   MuiTabPanel: {
     root: {
       padding: 0,

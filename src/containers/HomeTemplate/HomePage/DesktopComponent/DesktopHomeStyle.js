@@ -30,6 +30,7 @@ export const DesktopHomeStyle = makeStyles((theme) => ({
     display: "flex",
     maxWidth: "940px",
     margin: "auto",
+    width: "90%",
   },
   cinemaScrollBar: {
     height: "705px!important",
