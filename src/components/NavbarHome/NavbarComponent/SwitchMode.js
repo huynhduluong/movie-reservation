@@ -7,7 +7,6 @@ import { CHANGE_THEME_REQUEST } from "../modules/constant";
 
 function SwitchMode(props) {
   const { themeStatus, handleChangeTheme } = props;
-
   const handleOnChange = (event) => {
     handleChangeTheme(event.target.checked);
   };

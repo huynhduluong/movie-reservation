@@ -7,11 +7,12 @@ import { connect } from "react-redux";
 import { actListShowTimeApi } from "./modules/ListShowTime/action";
 
 function HomePage(props) {
+  const { listMovieApi, listShowTimeApi } = props;
   useEffect(() => {
-    props.listMovieApi();
-    props.listShowTimeApi();
+    listMovieApi();
+    listShowTimeApi();
     // props.listCinemaApi();
-  }, []);
+  });
   if (isWidthUp("sm", props.width)) {
     return <DesktopHome />;
   }

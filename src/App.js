@@ -11,16 +11,14 @@ import { useEffect } from "react";
 
 function App(props) {
   const { themeStatus, handleChangeTheme } = props;
+
   useEffect(() => {
-    if (
-      JSON.parse(localStorage.getItem("themeStatus")) &&
-      JSON.parse(localStorage.getItem("themeStatus")) !== themeStatus
-    ) {
+    if (JSON.parse(localStorage.getItem("themeStatus"))) {
       handleChangeTheme(JSON.parse(localStorage.getItem("themeStatus")));
     } else {
       localStorage.setItem("themeStatus", JSON.stringify(false));
     }
-  }, []);
+  });
 
   const showLayout = (routes, text) => {
     if (routes && routes.length > 0) {

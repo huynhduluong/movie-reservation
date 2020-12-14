@@ -28,7 +28,7 @@ export default function NavbarHome() {
                 <a href="#cumrap" className={classes.link}>
                   Cụm rạp
                 </a>
-                <a href="#" className={classes.link}>
+                <a href="#appPromotion" className={classes.link}>
                   Tin tức
                 </a>
                 <a href="#appPromotion" className={classes.link}>
