@@ -46,7 +46,7 @@ function App(props) {
   };
 
   return (
-    <BrowserRouter basename="/movie-reservation">
+    <BrowserRouter>
       <Switch>
         {showLayout(routesHome, "home")}
         {showLayout(routesAdmin, "admin")}
