@@ -53,7 +53,7 @@ export default function Movie(props) {
               <span className={classes.ticketButton}>Đặt vé</span>
               <span className={classes.score}>
                 {movie.danhGia}
-                <RatingStar number={parseFloat(movie.danhGia)} />
+                <RatingStar>{movie.danhGia}</RatingStar>
               </span>
             </React.Fragment>
           ) : (
