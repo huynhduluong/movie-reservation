@@ -7,9 +7,7 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { actChangeCinemaList } from "../../containers/HomeTemplate/HomePage/modules/ListShowTime/action";
+import React from "react";
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -44,17 +42,12 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-function LogoCinema(props) {
+export default function LogoCinema(props) {
   const classes = useStyle();
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
-    props.changeListCinema(index);
-  };
+  const { listLogo, handleLogoClick, currentLogo } = props;
+  const selectedIndex = currentLogo;
 
   const renderLogoCinema = () => {
-    const { listLogo } = props;
     if (listLogo && listLogo.length > 0) {
       return listLogo.map((logo, index) => {
         return (
@@ -66,7 +59,7 @@ function LogoCinema(props) {
                   : classes.listItem
               }
               selected={selectedIndex === index}
-              onClick={(event) => handleListItemClick(event, index)}
+              onClick={(event) => handleLogoClick(event, index)}
             >
               <Avatar alt={logo} src={logo} className={classes.avatar} />
               {props.detailPage ? (
@@ -101,19 +94,3 @@ function LogoCinema(props) {
 
   return <List className={classes.root}>{renderLogoCinema()}</List>;
 }
-
-const mapStateToProps = (state) => {
-  return {
-    listLogo: state.listShowTimeReducer.listLogo,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    changeListCinema: (cinemaIndex) => {
-      dispatch(actChangeCinemaList(cinemaIndex));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LogoCinema);

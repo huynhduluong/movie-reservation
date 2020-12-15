@@ -9,8 +9,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
-import { connect } from "react-redux";
-import { actChangeShowTimeList } from "../../containers/HomeTemplate/HomePage/modules/ListShowTime/action";
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -59,14 +57,10 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-function CinemaList(props) {
-  const { listCinema, currentShowTime } = props;
+export default function CinemaList(props) {
+  const { listCinema, currentShowTime, handleCinemaClick } = props;
   const classes = useStyle();
   let selectedIndex = currentShowTime;
-
-  const handleListItemClick = (event, index) => {
-    props.changeShowTime(index);
-  };
 
   return (
     <List className={classes.root}>
@@ -82,7 +76,7 @@ function CinemaList(props) {
                     : classes.listItem
                 }
                 selected={selectedIndex === index}
-                onClick={(event) => handleListItemClick(event, index)}
+                onClick={(event) => handleCinemaClick(event, index)}
               >
                 <ListItemAvatar>
                   <Avatar
@@ -137,20 +131,3 @@ function CinemaList(props) {
     </List>
   );
 }
-
-const mapStateToProps = (state) => {
-  return {
-    listCinema: state.listShowTimeReducer.listCinema,
-    currentShowTime: state.listShowTimeReducer.currentShowTime,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    changeShowTime: (currentIndex) => {
-      dispatch(actChangeShowTimeList(currentIndex));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CinemaList);

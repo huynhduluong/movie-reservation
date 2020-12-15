@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
-import { connect } from "react-redux";
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -80,7 +79,7 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-function ShowTimeList(props) {
+export default function ShowTimeList(props) {
   const classes = useStyle();
   const { listShowTime } = props;
   const renderShowTime = (listShowTimeItem) => {
@@ -171,11 +170,3 @@ function ShowTimeList(props) {
     </List>
   );
 }
-
-const mapStateToProps = (state) => {
-  return {
-    listShowTime: state.listShowTimeReducer.listShowTime,
-  };
-};
-
-export default connect(mapStateToProps)(ShowTimeList);
