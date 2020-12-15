@@ -55,6 +55,7 @@ const listShowTimeReducer = (state = initialState, action) => {
       const cinemaIndex = action.payload;
       state.listCinema = state.data[cinemaIndex].lstCumRap;
       state.listShowTime = state.data[cinemaIndex].lstCumRap[0].danhSachPhim;
+      state.currentShowTime = 0;
       return { ...state };
 
     //update when client click another listItem in cinemaList --> change listShowTime follow showTimeIndex
