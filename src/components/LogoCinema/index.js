@@ -49,7 +49,7 @@ export default function LogoCinema(props) {
 
   const renderLogoCinema = () => {
     if (listLogo && listLogo.length > 0) {
-      return listLogo.map((logo, index) => {
+      return listLogo.map((item, index) => {
         return (
           <React.Fragment key={index}>
             <ListItem
@@ -61,7 +61,11 @@ export default function LogoCinema(props) {
               selected={selectedIndex === index}
               onClick={(event) => handleLogoClick(event, index)}
             >
-              <Avatar alt={logo} src={logo} className={classes.avatar} />
+              <Avatar
+                alt={item.tenHeThongRap}
+                src={item.logo}
+                className={classes.avatar}
+              />
               {props.detailPage ? (
                 <ListItemText
                   primary={
@@ -72,7 +76,7 @@ export default function LogoCinema(props) {
                         color="textPrimary"
                         style={{ marginLeft: "10px" }}
                       >
-                        BHD
+                        {item.tenHeThongRap}
                       </Typography>
                     </React.Fragment>
                   }

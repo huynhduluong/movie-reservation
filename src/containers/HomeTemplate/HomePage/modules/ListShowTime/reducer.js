@@ -33,7 +33,10 @@ const listShowTimeReducer = (state = initialState, action) => {
       //render logoCinema Component
       //listLogo is not change during visiting
       state.listLogo = data.map((item) => {
-        return item.logo;
+        return {
+          tenHeThongRap: item.tenHeThongRap,
+          logo: item.logo,
+        };
       });
 
       //render CinemaList component with active at the first listItem
