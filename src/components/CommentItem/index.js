@@ -44,7 +44,6 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 export default function CommentItem(props) {
-  console.log(props);
   const classes = useStyle();
   return (
     <Box className={` ${props.className} ${classes.reviewerContain}`}>
@@ -82,11 +81,7 @@ export default function CommentItem(props) {
         </Box>
         <Box pt={1} mt={0} borderTop="1px solid #e6e6e6" textAlign="left">
           <Box display="flex" mr={4}>
-            <FavoriteIcon
-              color="textPrimary"
-              fontSize="small"
-              className={classes.likeIcon}
-            />
+            <FavoriteIcon fontSize="small" className={classes.likeIcon} />
             <Typography color="textPrimary" variant="body2">
               <strong>0 </strong>
               Thích

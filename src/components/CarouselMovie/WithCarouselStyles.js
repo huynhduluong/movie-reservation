@@ -5,8 +5,4 @@ export const WithCarouselStyle = makeStyles((theme) => ({
     background: theme.palette.background.default === "#fff" ? "#000" : "#fff",
     color: theme.palette.background.default === "#fff" ? "#fff" : "#000",
   },
-  dialogContent: {
-    padding: 0,
-    overflowY: "hidden",
-  },
 }));

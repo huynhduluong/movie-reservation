@@ -8,6 +8,30 @@ import {
   Link,
   makeStyles,
 } from "@material-ui/core";
+import AGRIBANK from "./../../assets/img/AGRIBANK.png";
+import cgv from "./../../assets/img/cgv.png";
+import bhd from "./../../assets/img/bhd.png";
+import galaxycine from "./../../assets/img/galaxycine.png";
+import cinestar from "./../../assets/img/cinestar.png";
+import lotte from "./../../assets/img/lotte.png";
+import megags from "./../../assets/img/megags.png";
+import bt from "./../../assets/img/bt.jpg";
+import dongdacinema from "./../../assets/img/dongdacinema.png";
+import TOUCH from "./../../assets/img/TOUCH.png";
+import cnx from "./../../assets/img/cnx.jpg";
+import STARLIGHT from "./../../assets/img/STARLIGHT.png";
+import dcine from "./../../assets/img/dcine.png";
+import zaloIcon from "./../../assets/img/zalopay_icon.png";
+import payoo from "./../../assets/img/payoo.jpg";
+import VCB from "./../../assets/img/VCB.png";
+import VIETTINBANK from "./../../assets/img/VIETTINBANK.png";
+import IVB from "./../../assets/img/IVB.png";
+import go from "./../../assets/img/123go.png";
+import laban from "./../../assets/img/laban.png";
+import apple from "./../../assets/img/apple-logo.png";
+import android from "./../../assets/img/android-logo.png";
+import facebook from "./../../assets/img/facebook-logo.png";
+import zalo from "./../../assets/img/zalo-logo.png";
 
 const useStyles = makeStyles(() => ({
   footer: {
@@ -105,38 +129,30 @@ export default function FooterHome() {
                 <Link href="https://www.cgv.vn/" target="_blank">
                   <Avatar
                     alt="cgv"
-                    src="img/cgv.png"
+                    src={cgv}
                     style={{ background: "#fff" }}
                     className={classes.avatar}
                   />
                 </Link>
                 <Link href="http://bhdstar.vn" target="_blank">
-                  <Avatar
-                    alt="bhd"
-                    src="img/bhd.png"
-                    className={classes.avatar}
-                  />
+                  <Avatar alt="bhd" src={bhd} className={classes.avatar} />
                 </Link>
                 <Link href="https://www.galaxycine.vn/" target="_blank">
                   <Avatar
                     alt="galaxy"
-                    src="img/galaxycine.png"
+                    src={galaxycine}
                     className={classes.avatar}
                   />
                 </Link>
                 <Link href="https://www.cinestar.com.vn/" target="_blank">
                   <Avatar
                     alt="cinestar"
-                    src="img/cinestar.png"
+                    src={cinestar}
                     className={classes.avatar}
                   />
                 </Link>
                 <Link href="https://www.lottecinemavn.com/" target="_blank">
-                  <Avatar
-                    alt="lotte"
-                    src="img/lotte.png"
-                    className={classes.avatar}
-                  />
+                  <Avatar alt="lotte" src={lotte} className={classes.avatar} />
                 </Link>
               </Box>
               <Box
@@ -148,38 +164,26 @@ export default function FooterHome() {
                 <Link href="https://www.megagscinemas.vn/" target="_blank">
                   <Avatar
                     alt="megags"
-                    src="img/megags.png"
+                    src={megags}
                     className={classes.avatar}
                   />
                 </Link>
 
                 <Link href="https://www.betacineplex.vn/" target="_blank">
-                  <Avatar
-                    alt="bt"
-                    src="img/bt.jpg"
-                    className={classes.avatar}
-                  />
+                  <Avatar alt="bt" src={bt} className={classes.avatar} />
                 </Link>
                 <Link href="http://ddcinema.vn/" target="_blank">
                   <Avatar
                     alt="dongdacinema"
-                    src="img/dongdacinema.png"
+                    src={dongdacinema}
                     className={classes.avatar}
                   />
                 </Link>
                 <Link href="https://touchcinema.com/" target="_blank">
-                  <Avatar
-                    alt="TOUCH"
-                    src="img/TOUCH.png"
-                    className={classes.avatar}
-                  />
+                  <Avatar alt="TOUCH" src={TOUCH} className={classes.avatar} />
                 </Link>
                 <Link href="https://cinemaxvn.com/" target="_blank">
-                  <Avatar
-                    alt="cnx"
-                    src="img/cnx.jpg"
-                    className={classes.avatar}
-                  />
+                  <Avatar alt="cnx" src={cnx} className={classes.avatar} />
                 </Link>
               </Box>
               <Box
@@ -191,36 +195,28 @@ export default function FooterHome() {
                 <Link href="https://starlight.vn/" target="_blank">
                   <Avatar
                     alt="starlight"
-                    src="img/STARLIGHT.png"
+                    src={STARLIGHT}
                     className={classes.avatar}
                   />
                 </Link>
 
                 <Link href="https://www.dcine.vn/" target="_blank">
-                  <Avatar
-                    alt="dcine"
-                    src="img/dcine.png"
-                    className={classes.avatar}
-                  />
+                  <Avatar alt="dcine" src={dcine} className={classes.avatar} />
                 </Link>
                 <Link href="https://zalopay.vn/" target="_blank">
                   <Avatar
                     alt="zalopay"
-                    src="img/zalopay_icon.png"
+                    src={zaloIcon}
                     className={classes.avatar}
                   />
                 </Link>
                 <Link href="https://www.payoo.vn/" target="_blank">
-                  <Avatar
-                    alt="payoo"
-                    src="img/payoo.jpg"
-                    className={classes.avatar}
-                  />
+                  <Avatar alt="payoo" src={payoo} className={classes.avatar} />
                 </Link>
                 <Link href="https://portal.vietcombank.com.vn/" target="_blank">
                   <Avatar
                     alt="vietcombank"
-                    src="img/VCB.png"
+                    src={VCB}
                     className={classes.avatar}
                   />
                 </Link>
@@ -234,7 +230,7 @@ export default function FooterHome() {
                 <Link href="https://www.agribank.com.vn/" target="_blank">
                   <Avatar
                     alt="agribank"
-                    src="img/AGRIBANK.png"
+                    src={AGRIBANK}
                     className={classes.avatar}
                   />
                 </Link>
@@ -245,30 +241,18 @@ export default function FooterHome() {
                 >
                   <Avatar
                     alt="viettinbank"
-                    src="img/VIETTINBANK.png"
+                    src={VIETTINBANK}
                     className={classes.avatar}
                   />
                 </Link>
                 <Link href="https://www.indovinabank.com.vn/" target="_blank">
-                  <Avatar
-                    alt="indovi"
-                    src="img/IVB.png"
-                    className={classes.avatar}
-                  />
+                  <Avatar alt="indovi" src={IVB} className={classes.avatar} />
                 </Link>
                 <Link href="https://webv3.123go.vn/" target="_blank">
-                  <Avatar
-                    alt="123go"
-                    src="img/123go.png"
-                    className={classes.avatar}
-                  />
+                  <Avatar alt="123go" src={go} className={classes.avatar} />
                 </Link>
                 <Link href="https://laban.vn/" target="_blank">
-                  <Avatar
-                    alt="laban"
-                    src="img/laban.png"
-                    className={classes.avatar}
-                  />
+                  <Avatar alt="laban" src={laban} className={classes.avatar} />
                 </Link>
               </Box>
             </Grid>
@@ -284,7 +268,7 @@ export default function FooterHome() {
                       <Avatar
                         style={{ margin: "5px" }}
                         alt="apple"
-                        src="img/apple-logo.png"
+                        src={apple}
                         className={classes.avatar}
                       />
                     </Link>
@@ -295,7 +279,7 @@ export default function FooterHome() {
                       <Avatar
                         style={{ margin: "5px" }}
                         alt="android"
-                        src="img/android-logo.png"
+                        src={android}
                         className={classes.avatar}
                       />
                     </Link>
@@ -310,7 +294,7 @@ export default function FooterHome() {
                     >
                       <Avatar
                         alt="facebook"
-                        src="img/facebook-logo.png"
+                        src={facebook}
                         className={classes.avatar}
                         style={{ margin: "5px" }}
                       />
@@ -318,7 +302,7 @@ export default function FooterHome() {
                     <Link href="https://zalo.me/tixdatve" target="_blank">
                       <Avatar
                         alt="zalo"
-                        src="img/zalo-logo.png"
+                        src={zalo}
                         className={classes.avatar}
                         style={{ margin: "5px" }}
                       />

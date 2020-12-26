@@ -18,7 +18,7 @@ export default function Movie(props) {
         <CardActionArea
           className={classes.actionArea}
           component={Link}
-          to="/phim"
+          to={`/phim/${movie.maPhim}`}
         >
           <CardMedia
             className={classes.media}

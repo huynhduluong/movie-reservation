@@ -5,6 +5,7 @@ import SwitchMode from "./NavbarComponent/SwitchMode";
 import UserIcon from "./NavbarComponent/UserIcon";
 import { Link } from "react-router-dom";
 import { useStyles } from "./NavbarStyle";
+import logo from "./../../assets/img/logo.png";
 
 export default function NavbarHome() {
   const classes = useStyles();
@@ -16,7 +17,7 @@ export default function NavbarHome() {
           <Avatar
             alt="logo"
             variant="square"
-            src="img/logo.png"
+            src={logo}
             className={classes.logo}
           ></Avatar>
           <div className={classes.listNav}>

@@ -9,16 +9,19 @@ import {
   ListItemText,
   makeStyles,
   Typography,
+  useMediaQuery,
 } from "@material-ui/core";
 import React from "react";
 
 const useStyle = makeStyles((theme) => ({
   root: {
-    minHeight: "705px",
-    height: "705px",
     width: "100%",
     padding: "0px 20px",
     background: theme.palette.background.paper,
+  },
+  fullHeight: {
+    minHeight: "705px",
+    height: "705px",
   },
   listItem: {
     padding: "0px",
@@ -28,8 +31,12 @@ const useStyle = makeStyles((theme) => ({
     transition: "all 0.2s",
     cursor: "pointer",
   },
-  avatar: {
+  avatarFilm: {
     width: "50px",
+    height: "70px",
+  },
+  avatarCinema: {
+    width: "70px",
     height: "70px",
   },
   itemText: {
@@ -82,6 +89,9 @@ const useStyle = makeStyles((theme) => ({
 export default function ShowTimeList(props) {
   const classes = useStyle();
   const { listShowTime } = props;
+  const matchBreakpoint = useMediaQuery((theme) =>
+    theme.breakpoints.down("xs")
+  );
   const renderShowTime = (listShowTimeItem) => {
     return listShowTimeItem
       .filter((item) => {
@@ -105,7 +115,11 @@ export default function ShowTimeList(props) {
   };
 
   return (
-    <List className={classes.root}>
+    <List
+      className={
+        matchBreakpoint ? classes.root : `${classes.root} ${classes.fullHeight}`
+      }
+    >
       {listShowTime &&
         listShowTime.map((film, index) => {
           return (
@@ -114,9 +128,14 @@ export default function ShowTimeList(props) {
                 <ListItemAvatar>
                   <Avatar
                     variant="square"
-                    alt={film.tenPhim}
-                    src={film.hinhAnh}
-                    className={classes.avatar}
+                    alt={film.tenPhim || film.tenCumRap}
+                    src={
+                      film.hinhAnh ||
+                      `https://s3img.vcdn.vn/123phim/2018/09/bhd-star-vincom-3-2-15379527367766.jpg`
+                    }
+                    className={
+                      film.tenPhim ? classes.avatarFilm : classes.avatarCinema
+                    }
                   />
                 </ListItemAvatar>
                 <ListItemText
@@ -127,7 +146,7 @@ export default function ShowTimeList(props) {
                         variant="body2"
                         color="textPrimary"
                       >
-                        {film.tenPhim}
+                        {film.tenPhim || film.tenCumRap}
                       </Typography>
                     </React.Fragment>
                   }
@@ -156,7 +175,9 @@ export default function ShowTimeList(props) {
                   2D Digital
                 </Typography>
                 <Box display="flex" flexWrap="wrap">
-                  {renderShowTime(film.lstLichChieuTheoPhim)}
+                  {film.lstLichChieuTheoPhim
+                    ? renderShowTime(film.lstLichChieuTheoPhim)
+                    : renderShowTime(film.lichChieuPhim)}
                 </Box>
               </div>
               <Divider

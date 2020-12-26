@@ -1,21 +1,14 @@
 import React from "react";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import { WithCarouselStyle } from "./WithCarouselStyles";
 import RatingStar from "../RatingStar";
+import { connect } from "react-redux";
+import { actChangeDialogStatus } from "../DialogMovie/modules/action";
+import { Link } from "react-router-dom";
 
-export default function CarouselFilmNow(props) {
-  const classes = WithCarouselStyle();
-  const { item } = props;
-  const [open, setOpen] = React.useState(false);
-
+function CarouselFilmNow(props) {
+  const { item, changeDialogStatus } = props;
   const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
+    changeDialogStatus({ status: true, movie: item });
   };
 
   return (
@@ -39,28 +32,21 @@ export default function CarouselFilmNow(props) {
             {item.tenPhim}
           </h3>
           <div className="filmDuration">100 phút</div>
-          <div className="buyTicket">Mua vé</div>
+          <Link className="buyTicket" to={`/phim/${item.maPhim}`}>
+            Mua vé
+          </Link>
         </div>
       </div>
-      <Dialog
-        fullWidth={true}
-        maxWidth={"md"}
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="max-width-dialog-title"
-      >
-        <DialogContent className={classes.dialogContent}>
-          <iframe
-            width={"100%"}
-            height={"100%"}
-            title={item.biDanh}
-            src={item.trailer}
-            frameBorder={0}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </DialogContent>
-      </Dialog>
     </React.Fragment>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeDialogStatus: (data) => {
+      dispatch(actChangeDialogStatus(data));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(CarouselFilmNow);

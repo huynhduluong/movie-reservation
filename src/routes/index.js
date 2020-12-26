@@ -14,7 +14,7 @@ const routesHome = [
   },
   {
     exact: false,
-    path: "/phim",
+    path: "/phim/:id",
     component: DetailFilmPage,
   },
   {
