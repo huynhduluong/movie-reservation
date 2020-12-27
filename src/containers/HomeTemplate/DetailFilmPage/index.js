@@ -29,10 +29,12 @@ function DetailFilmPage(props) {
   const [value, setValue] = React.useState("1");
 
   const { listDetailPageApi, data, listLogo, changeDialogStatus } = props;
+  const { id } = props.match.params;
+
   useEffect(() => {
-    const { id } = props.match.params;
     listDetailPageApi(id);
-  }, [listDetailPageApi]);
+  }, [id, listDetailPageApi]);
+  
 
   // check breakpoint screen to apply layout
   const matchBreakpoint = useMediaQuery((theme) =>
@@ -48,6 +50,7 @@ function DetailFilmPage(props) {
   };
 
   if (data && listLogo) {
+    console.log(data);
     return (
       <div className={classes.backgroundSection}>
         {/* Large Image and Rating on the top of page */}
