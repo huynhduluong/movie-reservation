@@ -1,11 +1,11 @@
 import {
   Box,
+  Button,
   Dialog,
   DialogContent,
   Grid,
   Hidden,
   Paper,
-  TextField,
   Typography,
 } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -94,11 +94,20 @@ export default function ReviewTab(props) {
         onClose={handleDialogCommentClose}
         aria-labelledby="responsive-dialog-title"
         className={classes.dialog}
+        scroll="body"
       >
-        <DialogContent className={classes.dialogContent}>
-          <Typography variant="body1" component="p">
-            x
-          </Typography>
+        <DialogContent
+          className={classes.dialogContent}
+          style={matchBreakpoint ? { height: "100%" } : { height: "auto" }}
+        >
+          <Box textAlign="right">
+            <img
+              src="https://tix.vn/app/assets/img/icons/xController.png"
+              alt="close"
+              onClick={handleDialogCommentClose}
+              style={{ cursor: "pointer" }}
+            />
+          </Box>
           <Box textAlign="center">
             <Typography variant="body1" component="p" className={classes.score}>
               {value * 2.0}
@@ -114,17 +123,18 @@ export default function ReviewTab(props) {
               className={classes.ratingDialog}
             />
           </Box>
-          <TextField
-            label="Label"
+          <textarea
+            autoFocus
+            rows={3}
             className={classes.inputComment}
             placeholder="Nói cho mọi người biết bạn nghĩ gì về phim này..."
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
+            defaultValue={""}
           />
+          <Box textAlign="right" width="90%" margin="auto">
+            <Button variant="contained" color="primary">
+              Đăng
+            </Button>
+          </Box>
         </DialogContent>
       </Dialog>
     </React.Fragment>

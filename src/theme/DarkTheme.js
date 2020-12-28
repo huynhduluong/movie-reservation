@@ -69,6 +69,9 @@ export const overrides = {
       height: "80%",
       boxShadow: "none",
     },
+    paperScrollBody: {
+      width: "90%",
+    },
   },
   MuiListItem: {
     root: {

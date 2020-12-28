@@ -273,6 +273,7 @@ export const ReviewTabStyles = makeStyles((theme) => ({
   },
   dialogContent: {
     background: "#fff",
+    padding: "15px",
   },
   ratingDialog: {},
   score: {
@@ -280,15 +281,25 @@ export const ReviewTabStyles = makeStyles((theme) => ({
     color: "#7ed321",
     fontFamily: "SF Medium",
     textAlign: "center",
-    marginTop: "10px",
+    marginTop: "-20px",
     marginBottom: "-5px",
     fontWeight: "bold",
   },
   inputComment: {
     margin: "20px",
-    width: "740px",
+    width: "90%",
     background: "#fff",
     resize: "none",
     fontSize: "16px",
+    appearance: "none",
+    padding: "20px",
+    borderRadius: "4px",
+    border: "1px solid #e8e8e9",
+    transition: "all .2s",
+    "&:focus": {
+      outlineWidth: 0,
+      borderColor: "#fb4226!important",
+      boxShadow: "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(251,66,38,.6)",
+    },
   },
 }));
