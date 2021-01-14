@@ -1,9 +1,7 @@
 import DashboardPage from "../containers/AdminTemplate/DashboardPage";
 import FilmPage from "../containers/AdminTemplate/FilmPage";
 import UserPage from "../containers/AdminTemplate/UserPage";
-import DetailCinemaPage from "../containers/HomeTemplate/DetailCinemaPage";
 import DetailFilmPage from "../containers/HomeTemplate/DetailFilmPage";
-import DetailNewsPage from "../containers/HomeTemplate/DetailNewsPage";
 import HomePage from "../containers/HomeTemplate/HomePage";
 
 const routesHome = [
@@ -16,16 +14,6 @@ const routesHome = [
     exact: false,
     path: "/phim/:id",
     component: DetailFilmPage,
-  },
-  {
-    exact: false,
-    path: "/rap-chieu-phim",
-    component: DetailCinemaPage,
-  },
-  {
-    exact: false,
-    path: "/tin-tuc",
-    component: DetailNewsPage,
   },
 ];
 
