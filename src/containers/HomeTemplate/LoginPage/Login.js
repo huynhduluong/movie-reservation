@@ -9,17 +9,17 @@ class LoginForm extends Component {
         <div className="forms-container">
           <div className="signin-signup">
             <form action="#" className="sign-in-form">
-              <h2 className="title">Sign in</h2>
+              <h2 className="title">Đăng nhập</h2>
               <div className="input-field">
                 <i className="fas fa-user" />
-                <input type="text" placeholder="Username" />
+                <input type="text" placeholder="Tài Khoản" />
               </div>
               <div className="input-field">
                 <i className="fas fa-lock" />
-                <input type="password" placeholder="Password" />
+                <input type="password" placeholder="Mật Khẩu" />
               </div>
               <button type="submit" className="btn solid">
-                Login
+                Đăng nhập
               </button>
             </form>
           </div>
@@ -27,10 +27,10 @@ class LoginForm extends Component {
         <div className="panels-container">
           <div className="panel left-panel">
             <div className="content">
-              <h3>New here ?</h3>
+              <h3>Bạn là người mới ?</h3>
               <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Debitis, ex ratione. Aliquid!
+                Nếu bạn là người mới thì hãy chọn nút đăng ký để có những trải
+                nghiệm tuyệt vời nhất
               </p>
               <button
                 className="btn transparent"
@@ -39,7 +39,7 @@ class LoginForm extends Component {
                   this.props.handleChangeStatus();
                 }}
               >
-                Sign up
+                Đăng ký
               </button>
             </div>
             <img src="/img/log.svg" className="image" alt="login" />

@@ -8,6 +8,8 @@ import { routesAdmin, routesHome } from "./routes";
 import { connect } from "react-redux";
 import { CHANGE_THEME_REQUEST } from "./components/NavbarHome/modules/constant";
 import { useEffect } from "react";
+import CheckoutPage from "./containers/HomeTemplate/CheckoutPage";
+import AuthPage from "./containers/AdminTemplate/AuthPage";
 
 function App(props) {
   const { themeStatus, handleChangeTheme } = props;
@@ -49,7 +51,9 @@ function App(props) {
         {showLayout(routesHome, "home")}
         {showLayout(routesAdmin, "admin")}
 
-        <Route path="/dang-nhap" component={LoginPage} />
+        <Route exact={false} path="/auth" component={AuthPage} />
+        <Route exact={false} path="/dang-nhap" component={LoginPage} />
+        <Route exact={false} path="/checkout" component={CheckoutPage} />
         <Route path="*" component={PageNotFound} />
       </Switch>
     </BrowserRouter>
