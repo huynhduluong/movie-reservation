@@ -10,24 +10,20 @@ class AuthPage extends Component {
     this.state = {
       taiKhoan: "",
       matKhau: "",
-      submitStatus: false,
     };
   }
 
   handelOnchange = (e) => {
     const { name, value } = e.target;
-    let submitStatus = false;
-    if (name && value) {
-      submitStatus = true;
-    }
+
     this.setState({
       [name]: value,
-      submitStatus,
     });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log(this.props.history);
     this.props.handleLogin(this.state, this.props.history);
   };
 
@@ -71,18 +67,14 @@ class AuthPage extends Component {
               <input
                 type="password"
                 className="form-control"
-                name="matKhau"
                 placeholder="Password"
+                name="matKhau"
                 value={this.state.matKhau}
                 onChange={this.handelOnchange}
               />
             </div>
             {this.renderNoti()}
-            <button
-              type="submit"
-              className="btn"
-              disabled={!this.state.submitStatus}
-            >
+            <button type="submit" className="btn">
               Login
             </button>
           </form>

@@ -276,6 +276,11 @@
   grid-column-start: 2;
 }
 
+.loginPage__error{
+  color: red;
+  display: block;
+}
+
 @media (max-width: 870px) {
   .loginPage__container {
     min-height: 800px;

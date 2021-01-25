@@ -1,23 +1,66 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actChangeLayoutForm } from "./modules/action";
+import { actChangeLayoutForm, actLoginApi } from "./modules/action";
 
 class LoginForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      taiKhoan: "",
+      matKhau: "",
+    };
+  }
+
+  handleOnchange = (e) => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.handleLogin(this.state, this.props.history);
+  };
+
+  renderNoti = () => {
+    if (this.props.err) {
+      return (
+        <div className="loginPage__error">
+          Tài khoản hoặc mật khẩu không đúng
+        </div>
+      );
+    }
+  };
+
   render() {
     return (
       <>
         <div className="forms-container">
           <div className="signin-signup">
-            <form action="#" className="sign-in-form">
+            <form className="sign-in-form" onSubmit={this.handleSubmit}>
               <h2 className="title">Đăng nhập</h2>
               <div className="input-field">
                 <i className="fas fa-user" />
-                <input type="text" placeholder="Tài Khoản" />
+                <input
+                  type="text"
+                  placeholder="Tài Khoản"
+                  name="taiKhoan"
+                  value={this.state.taiKhoan}
+                  onChange={this.handleOnchange}
+                />
               </div>
               <div className="input-field">
                 <i className="fas fa-lock" />
-                <input type="password" placeholder="Mật Khẩu" />
+                <input
+                  type="password"
+                  placeholder="Mật Khẩu"
+                  name="matKhau"
+                  value={this.state.matKhau}
+                  onChange={this.handleOnchange}
+                />
               </div>
+              {this.renderNoti()}
               <button type="submit" className="btn solid">
                 Đăng nhập
               </button>
@@ -55,7 +98,18 @@ const mapDispatchToProps = (dispatch) => {
     handleChangeStatus: () => {
       dispatch(actChangeLayoutForm());
     },
+    handleLogin: (user, history) => {
+      dispatch(actLoginApi(user, history));
+    },
   };
 };
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+const mapStateToProps = (state) => {
+  return {
+    loading: state.loginUserReducer.loading,
+    data: state.loginUserReducer.data,
+    err: state.loginUserReducer.err,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

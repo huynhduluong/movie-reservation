@@ -12,7 +12,6 @@ export const actAuthApi = (user, history) => {
     })
       .then((result) => {
         dispatch(actLoginSuccess(result.data));
-        console.log(result.data);
         if (result.data.maLoaiNguoiDung === "QuanTri") {
           //Chuyển đến trang dashboard
           //removeItem:
