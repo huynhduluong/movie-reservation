@@ -3,7 +3,6 @@ import { AppBar, Avatar, Box, Hidden, Toolbar } from "@material-ui/core";
 import ToggleMenu from "./NavbarComponent/ToggleMenu";
 import SwitchMode from "./NavbarComponent/SwitchMode";
 import UserIcon from "./NavbarComponent/UserIcon";
-import { Link } from "react-router-dom";
 import { useStyles } from "./NavbarStyle";
 import logo from "./../../assets/img/logo.png";
 
@@ -45,9 +44,7 @@ export default function NavbarHome() {
             className={classes.navRight}
           >
             <Hidden smDown>
-              <Link to="/dang-nhap" className={classes.textLogin}>
-                <UserIcon />
-              </Link>
+              <UserIcon />
               <SwitchMode />
             </Hidden>
             <Hidden mdUp>

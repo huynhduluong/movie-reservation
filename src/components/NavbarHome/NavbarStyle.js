@@ -1,12 +1,15 @@
 import { makeStyles } from "@material-ui/core";
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
     top: "-1px",
     left: 0,
     width: "100%",
     height: "60px",
-    backgroundColor: "rgba(255,255,255,.95)",
+    backgroundColor:
+      theme.palette.background.default === "#0f1b35"
+        ? "#222"
+        : theme.palette.background.default,
     boxShadow: "0 0 15px rgba(0,0,0,.3)",
     zIndex: 9,
     transition: "all .2s",
@@ -41,7 +44,7 @@ export const useStyles = makeStyles(() => ({
   },
   link: {
     margin: "0px 10px",
-    color: "black",
+    color: theme.palette.text.primary,
     transition: "all 0.2s",
     display: "inline-block",
     "&:hover": {
@@ -54,14 +57,44 @@ export const useStyles = makeStyles(() => ({
     justifyContent: "center",
     alignItems: "center",
     fontSize: "13px",
-    color: "black",
+    color: theme.palette.text.primary,
     margin: "0px 16px 0px 0px",
-    borderRight: "1px solid #e9e9e9",
+    // borderRight: "1px solid #e9e9e9",
     paddingRight: "11px",
     cursor: "pointer",
     "&:hover": {
       textDecoration: "none",
-      color: "black",
+      color: theme.palette.text.primary,
+    },
+  },
+  iconColor: {
+    color: theme.palette.text.primary,
+  },
+  userContainer: {
+    position: "relative",
+    "& ul": {
+      right: "15px",
+      position: "absolute",
+      width: "120px",
+      textAlign: "center",
+      backgroundColor: "#959595",
+      display: "none",
+      borderRadius: "4px",
+      color: "white",
+      padding: "5px",
+    },
+    "&:hover": {
+      "& ul": {
+        display: "block",
+      },
+    },
+  },
+  info: {
+    color: "inherit",
+    textDecoration: "none",
+    "&:hover": {
+      textDecoration: "none",
+      color: "inherit",
     },
   },
 }));

@@ -6,7 +6,7 @@ import {
 } from "./constant";
 
 const initialState = {
-  loginFormStatus: false, //true đã có tài khoản --> form sign in
+  loginFormStatus: true, //true đã có tài khoản --> form sign in
   loading: false,
   data: null,
   err: null,

@@ -1,21 +1,20 @@
-import {
-  Button,
-  Divider,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-} from "@material-ui/core";
+import { Button, Drawer, Hidden, List, ListItem } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useStyles } from "../NavbarStyle";
 import SwitchMode from "./SwitchMode";
 import UserIcon from "./UserIcon";
 
 export default function ToggleMenu() {
+  const classes = useStyles();
   const [state, setState] = useState({
     toggleStatus: false,
   });
+
+  const logOut = () => {
+    localStorage.removeItem("UserGuest");
+  };
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -39,24 +38,26 @@ export default function ToggleMenu() {
         <ListItem button>
           <SwitchMode />
         </ListItem>
-        <ListItem button component={Link} to="/dang-nhap">
+        <ListItem button>
           <UserIcon />
         </ListItem>
-      </List>
-      <Divider />
-      <List>
-        {["Lịch chiếu", "Cụm rạp", "Tin tức", "Ứng dụng"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
+        <Hidden mdUp>
+          <ListItem button>
+            <Link to="/thong-tin-nguoi-dung" className={classes.info}>
+              Thông tin
+            </Link>
           </ListItem>
-        ))}
+          <ListItem button onClick={logOut}>
+            Đăng xuất
+          </ListItem>
+        </Hidden>
       </List>
     </div>
   );
 
   return (
     <React.Fragment>
-      <Button onClick={toggleDrawer(true)} style={{ color: "black" }}>
+      <Button onClick={toggleDrawer(true)}>
         <MenuIcon />
       </Button>
       <Drawer
