@@ -16,8 +16,8 @@ import {
 } from "@material-ui/core";
 import { NewInput, UserStyles } from "./UserStyles";
 import { Formik } from "formik";
-import { actChangeInfoApi, actUserGuestApi } from "./modules/action";
 import * as Yup from "yup";
+import { actChangeInfoApi, actUserGuestApi } from "../LoginPage/modules/action";
 
 const validationSchema = Yup.object().shape({
   matKhau: Yup.string()
@@ -54,14 +54,14 @@ function UserGuestPage(props) {
     setValue(newValue);
   };
 
-  if (!JSON.parse(localStorage.getItem("UserGuest"))) {
+  if (!user && !JSON.parse(localStorage.getItem("UserGuest"))) {
     return <Redirect to="/dang-nhap" />;
   }
 
   const ValidationForm = () => {
     return (
       <React.Fragment>
-        {user ? (
+        {user && user.matKhau ? (
           <Formik
             initialValues={{
               taiKhoan: user.taiKhoan,
@@ -77,7 +77,7 @@ function UserGuestPage(props) {
               handleChangeInfo(values);
             }}
           >
-            {({ values, errors, handleChange, handleBlur, handleSubmit }) => (
+            {({ values, errors, handleChange, handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <Grid container spacing={3}>
                   <Grid item sm={6} xs={12}>

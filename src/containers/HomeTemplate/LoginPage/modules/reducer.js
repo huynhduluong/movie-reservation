@@ -1,7 +1,7 @@
 import {
-  LOGIN_FAILED,
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
+  USER_GUEST_FAILED,
+  USER_GUEST_REQUEST,
+  USER_GUEST_SUCCESS,
   CHANGE_LAYOUT_FORM,
 } from "./constant";
 
@@ -13,23 +13,23 @@ const initialState = {
   dialogStatus: false,
 };
 
-const loginUserReducer = (state = initialState, action) => {
+const userGuestReducer = (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_LAYOUT_FORM:
       let { loginFormStatus } = state;
       state.loginFormStatus = !loginFormStatus;
       return { ...state };
-    case LOGIN_REQUEST:
+    case USER_GUEST_REQUEST:
       state.loading = true;
       state.data = null;
       state.err = null;
       return { ...state };
-    case LOGIN_SUCCESS:
+    case USER_GUEST_SUCCESS:
       state.loading = false;
       state.data = action.payload;
       state.err = null;
       return { ...state };
-    case LOGIN_FAILED:
+    case USER_GUEST_FAILED:
       state.loading = false;
       state.data = null;
       state.err = action.payload;
@@ -39,4 +39,4 @@ const loginUserReducer = (state = initialState, action) => {
   }
 };
 
-export default loginUserReducer;
+export default userGuestReducer;

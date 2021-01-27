@@ -1,5 +1,9 @@
 import { CHANGE_LAYOUT_FORM } from "./constant";
-import { LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS } from "./constant";
+import {
+  USER_GUEST_FAILED,
+  USER_GUEST_REQUEST,
+  USER_GUEST_SUCCESS,
+} from "./constant";
 import Axios from "axios";
 
 export const actChangeLayoutForm = () => {
@@ -10,14 +14,14 @@ export const actChangeLayoutForm = () => {
 export const actLoginApi = (user, history) => {
   //username: dpnguyen password:123456
   return (dispatch) => {
-    dispatch(actLoginRequest());
+    dispatch(actUserGuestRequest());
     Axios({
       url: "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
       method: "POST",
       data: user,
     })
       .then((result) => {
-        dispatch(actLoginSuccess(result.data));
+        dispatch(actUserGuestSuccess(result.data));
         if (result.data.maLoaiNguoiDung === "KhachHang") {
           localStorage.setItem("UserGuest", JSON.stringify(result.data));
           history.push("/");
@@ -26,25 +30,72 @@ export const actLoginApi = (user, history) => {
         }
       })
       .catch((err) => {
-        dispatch(actLoginFailed(err));
+        dispatch(actUserGuestFailed(err));
       });
   };
 };
 
-export const actLoginRequest = () => {
-  return {
-    type: LOGIN_REQUEST,
+export const actUserGuestApi = () => {
+  let accessToken = JSON.parse(localStorage.getItem("UserGuest")).accessToken;
+  let user = {
+    taiKhoan: JSON.parse(localStorage.getItem("UserGuest")).taiKhoan,
+  };
+  return (dispatch) => {
+    dispatch(actUserGuestRequest());
+    Axios({
+      url:
+        "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinTaiKhoan",
+      data: user,
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((result) => {
+        dispatch(actUserGuestSuccess(result.data));
+      })
+      .catch((err) => {
+        dispatch(actUserGuestFailed(err));
+      });
   };
 };
-export const actLoginSuccess = (data) => {
+
+export const actChangeInfoApi = (user) => {
+  let accessToken = JSON.parse(localStorage.getItem("UserGuest")).accessToken;
+  return (dispatch) => {
+    Axios({
+      url:
+        "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung", //không có https nên báo lỗi
+      data: user,
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((result) => {
+        alert("Thay đổi thông tin thành công");
+        dispatch(actUserGuestSuccess(result.data));
+      })
+      .catch((err) => {
+        alert(err.response.data);
+      });
+  };
+};
+
+export const actUserGuestRequest = () => {
   return {
-    type: LOGIN_SUCCESS,
+    type: USER_GUEST_REQUEST,
+  };
+};
+export const actUserGuestSuccess = (data) => {
+  return {
+    type: USER_GUEST_SUCCESS,
     payload: data,
   };
 };
-export const actLoginFailed = (err) => {
+export const actUserGuestFailed = (err) => {
   return {
-    type: LOGIN_FAILED,
+    type: USER_GUEST_FAILED,
     payload: err,
   };
 };

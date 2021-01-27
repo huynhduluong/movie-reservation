@@ -106,9 +106,9 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.loginUserReducer.loading,
-    data: state.loginUserReducer.data,
-    err: state.loginUserReducer.err,
+    loading: state.userGuestReducer.loading,
+    data: state.userGuestReducer.data,
+    err: state.userGuestReducer.err,
   };
 };
 

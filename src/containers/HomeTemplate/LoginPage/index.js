@@ -29,7 +29,7 @@ class LoginPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    loginFormStatus: state.loginUserReducer.loginFormStatus,
+    loginFormStatus: state.userGuestReducer.loginFormStatus,
   };
 };
 

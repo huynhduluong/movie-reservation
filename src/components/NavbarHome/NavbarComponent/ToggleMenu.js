@@ -7,7 +7,7 @@ import SwitchMode from "./SwitchMode";
 import UserIcon from "./UserIcon";
 
 import { connect } from "react-redux";
-import { actLoginSuccess } from "../../../containers/HomeTemplate/LoginPage/modules/action";
+import { actUserGuestSuccess } from "../../../containers/HomeTemplate/LoginPage/modules/action";
 
 function ToggleMenu(props) {
   const classes = useStyles();
@@ -95,14 +95,14 @@ function ToggleMenu(props) {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleDispatchLogin: (data) => {
-      dispatch(actLoginSuccess(data));
+      dispatch(actUserGuestSuccess(data));
     },
   };
 };
 
 const mapStateToProps = (state) => {
   return {
-    user: state.loginUserReducer.data,
+    user: state.userGuestReducer.data,
   };
 };
 
