@@ -12,7 +12,6 @@ export const actChangeLayoutForm = () => {
   };
 };
 export const actLoginApi = (user, history) => {
-  //username: dpnguyen password:123456
   return (dispatch) => {
     dispatch(actUserGuestRequest());
     Axios({
@@ -31,6 +30,25 @@ export const actLoginApi = (user, history) => {
       })
       .catch((err) => {
         dispatch(actUserGuestFailed(err));
+      });
+  };
+};
+
+export const actSignupApi = (user, history) => {
+  return (dispatch) => {
+    dispatch(actUserGuestRequest());
+    Axios({
+      url: "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy",
+      method: "POST",
+      data: user,
+    })
+      .then((result) => {
+        dispatch(actChangeLayoutForm());
+        alert("Đăng ký thành công");
+      })
+      .catch((err) => {
+        alert(err.response.data);
+        dispatch(actUserGuestFailed(err.response.data));
       });
   };
 };

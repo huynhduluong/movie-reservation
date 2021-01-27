@@ -17,6 +17,7 @@ const userGuestReducer = (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_LAYOUT_FORM:
       let { loginFormStatus } = state;
+      state.loading = false;
       state.loginFormStatus = !loginFormStatus;
       return { ...state };
     case USER_GUEST_REQUEST:

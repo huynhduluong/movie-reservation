@@ -1,30 +1,31 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import LoginForm from "./Login";
 import SignUpForm from "./SignUp";
 import "./login.css";
 import { Redirect } from "react-router-dom";
 
-class LoginPage extends Component {
-  render() {
-    const { loginFormStatus } = this.props;
-    if (JSON.parse(localStorage.getItem("UserGuest"))) {
-      return <Redirect to="/" />;
-    }
-    return (
-      <div
-        className={`loginPage__container ${
-          loginFormStatus ? "" : "sign-up-mode"
-        } `}
-      >
-        {loginFormStatus ? (
-          <LoginForm history={this.props.history} />
-        ) : (
-          <SignUpForm history={this.props.history} />
-        )}
-      </div>
-    );
+function LoginPage(props) {
+  const [loginStatus, setLoginStatus] = useState(true);
+  const { loginFormStatus } = props;
+  useEffect(() => {
+    setLoginStatus(loginFormStatus);
+  }, [loginFormStatus]);
+
+  if (JSON.parse(localStorage.getItem("UserGuest"))) {
+    return <Redirect to="/" />;
   }
+  return (
+    <div
+      className={`loginPage__container ${loginStatus ? "" : "sign-up-mode"} `}
+    >
+      {loginStatus ? (
+        <LoginForm history={props.history} />
+      ) : (
+        <SignUpForm history={props.history} />
+      )}
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => {
