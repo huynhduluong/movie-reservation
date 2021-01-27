@@ -9,7 +9,7 @@ import {
 
 export const actDetailPageApi = (id) => {
   return (dispatch) => {
-    actDetailPageRequest();
+    dispatch(actDetailPageRequest());
     Axios({
       url: `https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${id}`,
       method: "GET",

@@ -6,6 +6,7 @@ import listShowTimeReducer from "./../../containers/HomeTemplate/HomePage/module
 import detailPageReducer from "./../../containers/HomeTemplate/DetailFilmPage/modules/reducer";
 import dialogReducer from "./../../components/DialogMovie/modules/reducer";
 import authReducer from "./../../containers/AdminTemplate/AuthPage/modules/reducer";
+import userGuestReducer from "./../../containers/HomeTemplate/UserGuestPage/modules/reducer";
 
 const rootReducer = combineReducers({
   loginUserReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   detailPageReducer,
   dialogReducer,
   authReducer,
+  userGuestReducer,
 });
 
 export default rootReducer;

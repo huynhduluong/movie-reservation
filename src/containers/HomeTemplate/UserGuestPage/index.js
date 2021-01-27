@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -12,191 +12,272 @@ import {
   Paper,
   Typography,
   Button,
+  Hidden,
 } from "@material-ui/core";
 import { NewInput, UserStyles } from "./UserStyles";
-import { useFormik } from "formik";
+import { Formik } from "formik";
+import { actChangeInfoApi, actUserGuestApi } from "./modules/action";
+import * as Yup from "yup";
 
-const validate = (values) => {
-  const errors = {};
-  if (!values.matKhau) {
-    errors.matKhau = "Vui lòng nhập mật khẩu";
-  } else if (values.matKhau.length < 6) {
-    errors.matKhau = "Mật khẩu phải có ít nhất 6 ký tự";
-  }
-
-  if (!values.hoTen) {
-    errors.hoTen = "Vui lòng nhập họ tên";
-  } else if (
-    !/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]+$/.test(
-      values.hoTen
-    )
-  ) {
-    errors.hoTen = "Họ tên không hợp lệ";
-  }
-
-  if (!values.email) {
-    errors.email = "Vui lòng nhập email";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Email không hợp lệ";
-  }
-
-  if (!values.soDt) {
-    errors.soDt = "Vui lòng nhập số ĐT";
-  } else if (!/^\d{10}$/i.test(values.soDt)) {
-    errors.soDt = "Số ĐT không hợp lệ";
-  }
-
-  return errors;
-};
+const validationSchema = Yup.object().shape({
+  matKhau: Yup.string()
+    .min(6, "Quá ngắn!")
+    .max(20, "Quá dài!")
+    .required("Vui lòng nhập mật khẩu!"),
+  hoTen: Yup.string()
+    .min(2, "Quá ngắn!")
+    .max(50, "Quá dài!")
+    .required("Vui lòng nhập họ tên!")
+    .matches(
+      /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]+$/,
+      "Họ tên không hợp lệ"
+    ),
+  email: Yup.string()
+    .email("Email không hợp lệ")
+    .required("Vui lòng nhập email!"),
+  soDt: Yup.string()
+    .matches(/^\d{10}$/, "Số ĐT không hợp lệ")
+    .required("Vui lòng nhập số ĐT!"),
+});
 
 function UserGuestPage(props) {
   const classes = UserStyles();
-
-  const user = props.user || JSON.parse(localStorage.getItem("UserGuest"));
+  const { userGuestApi, user, handleChangeInfo } = props;
 
   const [value, setValue] = useState("info");
 
-  const handleChange = (event, newValue) => {
+  useEffect(() => {
+    userGuestApi();
+  }, [userGuestApi]);
+
+  const handleChangeTab = (event, newValue) => {
     setValue(newValue);
   };
 
+  if (!JSON.parse(localStorage.getItem("UserGuest"))) {
+    return <Redirect to="/dang-nhap" />;
+  }
+
   const ValidationForm = () => {
-    const formik = useFormik({
-      initialValues: {
-        taiKhoan: "huynhduluong137",
-        matKhau: "Luong123",
-        hoTen: "Huỳnh Du Lượng",
-        email: "huynhduluong@gmail.com",
-        soDt: "0908328143",
-      },
-      validate,
-      onSubmit: (values) => {
-        console.log(values);
-      },
-    });
     return (
-      <form onSubmit={formik.handleSubmit}>
-        <Grid container spacing={3}>
-          <Grid item sm={6} xs={12}>
-            <Box display="flex" justifyContent="center" alignItems="center">
-              <FormControl className={classes.formControl}>
-                <InputLabel shrink htmlFor="taiKhoan" className={classes.label}>
-                  Tài khoản
-                </InputLabel>
-                <NewInput
-                  defaultValue={formik.values.taiKhoan}
-                  type="text"
-                  disabled
-                  id="taiKhoan"
-                  name="taiKhoan"
-                />
-              </FormControl>
-            </Box>
-          </Grid>
-          <Grid item sm={6} xs={12}>
-            <Box display="flex" justifyContent="center" alignItems="center">
-              <FormControl className={classes.formControl}>
-                <InputLabel shrink htmlFor="matKhau" className={classes.label}>
-                  Mật Khẩu
-                </InputLabel>
-                <NewInput
-                  defaultValue={formik.values.matKhau}
-                  type="password"
-                  id="matKhau"
-                  name="matKhau"
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.matKhau ? (
-                  <div className={classes.error}>{formik.errors.matKhau}</div>
-                ) : (
-                  <React.Fragment></React.Fragment>
-                )}
-              </FormControl>
-            </Box>
-          </Grid>
-          <Grid item sm={6} xs={12}>
-            <Box display="flex" justifyContent="center" alignItems="center">
-              <FormControl className={classes.formControl}>
-                <InputLabel shrink htmlFor="hoTen" className={classes.label}>
-                  Họ Tên
-                </InputLabel>
-                <NewInput
-                  defaultValue={formik.values.hoTen}
-                  id="hoTen"
-                  name="hoTen"
-                  type="text"
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.hoTen ? (
-                  <div className={classes.error}>{formik.errors.hoTen}</div>
-                ) : (
-                  <React.Fragment></React.Fragment>
-                )}
-              </FormControl>
-            </Box>
-          </Grid>
-          <Grid item sm={6} xs={12}>
-            <Box display="flex" justifyContent="center" alignItems="center">
-              <FormControl className={classes.formControl}>
-                <InputLabel shrink htmlFor="email" className={classes.label}>
-                  Email
-                </InputLabel>
-                <NewInput
-                  defaultValue={formik.values.email}
-                  name="email"
-                  type="text"
-                  id="email"
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.email ? (
-                  <div className={classes.error}>{formik.errors.email}</div>
-                ) : (
-                  <React.Fragment></React.Fragment>
-                )}
-              </FormControl>
-            </Box>
-          </Grid>
-          <Grid item sm={6} xs={12}>
-            <Box display="flex" justifyContent="center" alignItems="center">
-              <FormControl className={classes.formControl}>
-                <InputLabel shrink htmlFor="soDt" className={classes.label}>
-                  Số Điện Thoại
-                </InputLabel>
-                <NewInput
-                  defaultValue={formik.values.soDt}
-                  name="soDt"
-                  type="text"
-                  id="soDt"
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.soDt ? (
-                  <div className={classes.error}>{formik.errors.soDt}</div>
-                ) : (
-                  <React.Fragment></React.Fragment>
-                )}
-              </FormControl>
-            </Box>
-          </Grid>
-        </Grid>
-        <Box display="flex" justifyContent="center" alignItems="center">
-          <Button variant="contained" color="primary" type="submit">
-            Submit
-          </Button>
-        </Box>
-      </form>
+      <React.Fragment>
+        {user ? (
+          <Formik
+            initialValues={{
+              taiKhoan: user.taiKhoan,
+              matKhau: user.matKhau,
+              hoTen: user.hoTen,
+              email: user.email,
+              soDt: user.soDT,
+              maNhom: user.maNhom,
+              maLoaiNguoiDung: "KhachHang",
+            }}
+            validationSchema={validationSchema}
+            onSubmit={(values) => {
+              handleChangeInfo(values);
+            }}
+          >
+            {({ values, errors, handleChange, handleBlur, handleSubmit }) => (
+              <form onSubmit={handleSubmit}>
+                <Grid container spacing={3}>
+                  <Grid item sm={6} xs={12}>
+                    <Box
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <FormControl className={classes.formControl}>
+                        <InputLabel
+                          shrink
+                          htmlFor="taiKhoan"
+                          className={classes.label}
+                        >
+                          Tài khoản
+                        </InputLabel>
+                        <NewInput
+                          defaultValue={values.taiKhoan}
+                          type="text"
+                          disabled
+                          id="taiKhoan"
+                          name="taiKhoan"
+                        />
+                      </FormControl>
+                    </Box>
+                  </Grid>
+                  <Grid item sm={6} xs={12}>
+                    <Box
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <FormControl className={classes.formControl}>
+                        <InputLabel
+                          shrink
+                          htmlFor="matKhau"
+                          className={classes.label}
+                        >
+                          Mật Khẩu
+                        </InputLabel>
+                        <NewInput
+                          defaultValue={values.matKhau}
+                          type="password"
+                          id="matKhau"
+                          name="matKhau"
+                          onChange={handleChange}
+                        />
+                        {errors.matKhau ? (
+                          <div className={classes.error}>{errors.matKhau}</div>
+                        ) : (
+                          <React.Fragment></React.Fragment>
+                        )}
+                      </FormControl>
+                    </Box>
+                  </Grid>
+                  <Grid item sm={6} xs={12}>
+                    <Box
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <FormControl className={classes.formControl}>
+                        <InputLabel
+                          shrink
+                          htmlFor="hoTen"
+                          className={classes.label}
+                        >
+                          Họ Tên
+                        </InputLabel>
+                        <NewInput
+                          defaultValue={values.hoTen}
+                          id="hoTen"
+                          name="hoTen"
+                          type="text"
+                          onChange={handleChange}
+                        />
+                        {errors.hoTen ? (
+                          <div className={classes.error}>{errors.hoTen}</div>
+                        ) : (
+                          <React.Fragment></React.Fragment>
+                        )}
+                      </FormControl>
+                    </Box>
+                  </Grid>
+                  <Grid item sm={6} xs={12}>
+                    <Box
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <FormControl className={classes.formControl}>
+                        <InputLabel
+                          shrink
+                          htmlFor="email"
+                          className={classes.label}
+                        >
+                          Email
+                        </InputLabel>
+                        <NewInput
+                          defaultValue={values.email}
+                          name="email"
+                          type="text"
+                          id="email"
+                          onChange={handleChange}
+                        />
+                        {errors.email ? (
+                          <div className={classes.error}>{errors.email}</div>
+                        ) : (
+                          <React.Fragment></React.Fragment>
+                        )}
+                      </FormControl>
+                    </Box>
+                  </Grid>
+                  <Grid item sm={6} xs={12}>
+                    <Box
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <FormControl className={classes.formControl}>
+                        <InputLabel
+                          shrink
+                          htmlFor="soDt"
+                          className={classes.label}
+                        >
+                          Số Điện Thoại
+                        </InputLabel>
+                        <NewInput
+                          defaultValue={values.soDt}
+                          name="soDt"
+                          type="text"
+                          id="soDt"
+                          onChange={handleChange}
+                        />
+                        {errors.soDt ? (
+                          <div className={classes.error}>{errors.soDt}</div>
+                        ) : (
+                          <React.Fragment></React.Fragment>
+                        )}
+                      </FormControl>
+                    </Box>
+                  </Grid>
+                </Grid>
+                <Box display="flex" justifyContent="center" alignItems="center">
+                  <Button variant="contained" color="primary" type="submit">
+                    Submit
+                  </Button>
+                </Box>
+              </form>
+            )}
+          </Formik>
+        ) : (
+          <React.Fragment></React.Fragment>
+        )}
+      </React.Fragment>
     );
   };
 
-  if (!user) {
-    return <Redirect to="/dang-nhap" />;
-  }
+  const renderHistoryItem = () => {
+    //use thongTinDatVe array to render historyItem
+    return (
+      <React.Fragment>
+        {[0, 1, 2].map((item) => {
+          return (
+            <Grid container spacing={3} key={item}>
+              <Grid item xs={5}>
+                <img
+                  src={`http://movie0706.cybersoft.edu.vn/hinhanh/ted-part-2_gp09.jfif`}
+                  alt={`http://movie0706.cybersoft.edu.vn/hinhanh/ted-part-2_gp09.jfif`}
+                  className={classes.image}
+                />
+              </Grid>
+              <Grid item xs={7}>
+                <Box className={classes.content}>
+                  <Typography component="h5" variant="h5">
+                    Tên phim
+                  </Typography>
+                  <Box display="flex">
+                    <span className={classes.ageLimitButton}>C18</span>
+                  </Box>
+                  <p>Ngày chiếu</p>
+                  <p>Giờ chiếu</p>
+                  <p>Tên cụm rạp</p>
+                  <p>Tên rạp - số ghế</p>
+                  <p>Số tiền</p>
+                </Box>
+              </Grid>
+            </Grid>
+          );
+        })}
+      </React.Fragment>
+    );
+  };
 
   return (
     <div>
       <TabContext value={value}>
         <Tabs
           value={value}
-          onChange={handleChange}
+          onChange={handleChangeTab}
           textColor="primary"
           centered
           aria-label="User info tab"
@@ -233,99 +314,34 @@ function UserGuestPage(props) {
               alignItems: "center",
             }}
           >
-            <Paper className={classes.container}>
-              <Grid container spacing={3}>
-                <Grid item xs={5}>
-                  <img
-                    src={`http://movie0706.cybersoft.edu.vn/hinhanh/ted-part-2_gp09.jfif`}
-                    alt={`http://movie0706.cybersoft.edu.vn/hinhanh/ted-part-2_gp09.jfif`}
-                    className={classes.image}
-                  />
-                </Grid>
-                <Grid item xs={7}>
-                  <Box className={classes.content}>
-                    <Typography component="h5" variant="h5">
-                      Tên phim
-                    </Typography>
-                    <Box display="flex">
-                      <span className={classes.ageLimitButton}>C18</span>
-                    </Box>
-                    <p>Ngày chiếu</p>
-                    <p>Giờ chiếu</p>
-                    <p>Tên cụm rạp</p>
-                    <p>Tên rạp - số ghế</p>
-                    <p>Số tiền</p>
-                  </Box>
-                </Grid>
-              </Grid>
-              <Grid container spacing={3}>
-                <Grid item xs={5}>
-                  <img
-                    src={`http://movie0706.cybersoft.edu.vn/hinhanh/ted-part-2_gp09.jfif`}
-                    alt={`http://movie0706.cybersoft.edu.vn/hinhanh/ted-part-2_gp09.jfif`}
-                    className={classes.image}
-                  />
-                </Grid>
-                <Grid item xs={7}>
-                  <Box className={classes.content}>
-                    <Typography component="h5" variant="h5">
-                      Tên phim
-                    </Typography>
-                    <Box display="flex">
-                      <span className={classes.ageLimitButton}>C18</span>
-                    </Box>
-                    <p>Ngày chiếu</p>
-                    <p>Giờ chiếu</p>
-                    <p>Tên cụm rạp</p>
-                    <p>Tên rạp - số ghế</p>
-                    <p>Số tiền</p>
-                  </Box>
-                </Grid>
-              </Grid>
-              <Grid container spacing={3}>
-                <Grid item xs={5}>
-                  <img
-                    src={`http://movie0706.cybersoft.edu.vn/hinhanh/ted-part-2_gp09.jfif`}
-                    alt={`http://movie0706.cybersoft.edu.vn/hinhanh/ted-part-2_gp09.jfif`}
-                    className={classes.image}
-                  />
-                </Grid>
-                <Grid item xs={7}>
-                  <Box className={classes.content}>
-                    <Typography component="h5" variant="h5">
-                      Tên phim
-                    </Typography>
-                    <Box display="flex">
-                      <span className={classes.ageLimitButton}>C18</span>
-                    </Box>
-                    <p>Ngày chiếu</p>
-                    <p>Giờ chiếu</p>
-                    <p>Tên cụm rạp</p>
-                    <p>Tên rạp - số ghế</p>
-                    <p>Số tiền</p>
-                  </Box>
-                </Grid>
-              </Grid>
-            </Paper>
+            <Paper className={classes.container}>{renderHistoryItem()}</Paper>
           </Box>
         </TabPanel>
       </TabContext>
+      <Hidden smUp>
+        <Button variant="contained" color="secondary" component={Link} to="/">
+          Trang chủ
+        </Button>
+      </Hidden>
     </div>
   );
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     handleDispatchLogin: (data) => {
-//       dispatch(actLoginSuccess(data));
-//     },
-//   };
-// };
-
-const mapStateToProps = (state) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    user: state.loginUserReducer.data,
+    userGuestApi: () => {
+      dispatch(actUserGuestApi());
+    },
+    handleChangeInfo: (user) => {
+      dispatch(actChangeInfoApi(user));
+    },
   };
 };
 
-export default connect(mapStateToProps)(UserGuestPage);
+const mapStateToProps = (state) => {
+  return {
+    user: state.userGuestReducer.data,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserGuestPage);
