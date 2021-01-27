@@ -1,5 +1,5 @@
 import { CHANGE_LAYOUT_FORM } from "./constant";
-import { AUTH_FAILED, AUTH_REQUEST, AUTH_SUCCESS } from "./constant";
+import { LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS } from "./constant";
 import Axios from "axios";
 
 export const actChangeLayoutForm = () => {
@@ -33,18 +33,18 @@ export const actLoginApi = (user, history) => {
 
 export const actLoginRequest = () => {
   return {
-    type: AUTH_REQUEST,
+    type: LOGIN_REQUEST,
   };
 };
 export const actLoginSuccess = (data) => {
   return {
-    type: AUTH_SUCCESS,
+    type: LOGIN_SUCCESS,
     payload: data,
   };
 };
 export const actLoginFailed = (err) => {
   return {
-    type: AUTH_FAILED,
+    type: LOGIN_FAILED,
     payload: err,
   };
 };

@@ -3,10 +3,14 @@ import { connect } from "react-redux";
 import LoginForm from "./Login";
 import SignUpForm from "./SignUp";
 import "./login.css";
+import { Redirect } from "react-router-dom";
 
 class LoginPage extends Component {
   render() {
     const { loginFormStatus } = this.props;
+    if (JSON.parse(localStorage.getItem("UserGuest"))) {
+      return <Redirect to="/" />;
+    }
     return (
       <div
         className={`loginPage__container ${

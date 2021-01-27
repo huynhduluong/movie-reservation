@@ -13,7 +13,7 @@ export default function WithCard(Component) {
             <CardMedia
               className={classes.cover}
               image={props.data.imageLink}
-              title="Live from space album cover"
+              title={props.data.imageLink}
             />
           </div>
           <div className={classes.details}>

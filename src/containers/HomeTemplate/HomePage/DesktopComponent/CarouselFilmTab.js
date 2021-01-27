@@ -31,7 +31,7 @@ function CarouselFilmTab(props) {
           onChange={handleChange}
           textColor="primary"
           centered
-          aria-label="simple tabs example"
+          aria-label="film tabs"
         >
           <Tab
             label="Đang Chiếu"

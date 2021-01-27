@@ -1,5 +1,5 @@
 export const CHANGE_LAYOUT_FORM = "loginUserReducer/CHANGE_LAYOUT_FORM";
 
-export const AUTH_REQUEST = "loginUserReducer/AUTH_REQUEST";
-export const AUTH_SUCCESS = "loginUserReducer/AUTH_SUCCESS";
-export const AUTH_FAILED = "loginUserReducer/AUTH_FAILED";
+export const LOGIN_REQUEST = "loginUserReducer/LOGIN_REQUEST";
+export const LOGIN_SUCCESS = "loginUserReducer/LOGIN_SUCCESS";
+export const LOGIN_FAILED = "loginUserReducer/LOGIN_FAILED";

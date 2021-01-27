@@ -1,19 +1,30 @@
 import { Button, Drawer, Hidden, List, ListItem } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useStyles } from "../NavbarStyle";
 import SwitchMode from "./SwitchMode";
 import UserIcon from "./UserIcon";
 
-export default function ToggleMenu() {
+import { connect } from "react-redux";
+import { actLoginSuccess } from "../../../containers/HomeTemplate/LoginPage/modules/action";
+
+function ToggleMenu(props) {
   const classes = useStyles();
+  const user = props.user || JSON.parse(localStorage.getItem("UserGuest"));
+
+  useEffect(() => {
+    if (!props.user) {
+      props.handleDispatchLogin(user);
+    }
+  });
   const [state, setState] = useState({
     toggleStatus: false,
   });
 
   const logOut = () => {
     localStorage.removeItem("UserGuest");
+    props.handleDispatchLogin(null);
   };
 
   const toggleDrawer = (open) => (event) => {
@@ -25,6 +36,25 @@ export default function ToggleMenu() {
     }
 
     setState({ toggleStatus: open });
+  };
+
+  const userInfo = () => {
+    if (user) {
+      return (
+        <Hidden mdUp>
+          <ListItem button>
+            <Link to="/thong-tin-nguoi-dung" className={classes.info}>
+              Thông tin
+            </Link>
+          </ListItem>
+          <ListItem button onClick={logOut}>
+            Đăng xuất
+          </ListItem>
+        </Hidden>
+      );
+    } else {
+      return <React.Fragment></React.Fragment>;
+    }
   };
 
   const list = () => (
@@ -41,16 +71,7 @@ export default function ToggleMenu() {
         <ListItem button>
           <UserIcon />
         </ListItem>
-        <Hidden mdUp>
-          <ListItem button>
-            <Link to="/thong-tin-nguoi-dung" className={classes.info}>
-              Thông tin
-            </Link>
-          </ListItem>
-          <ListItem button onClick={logOut}>
-            Đăng xuất
-          </ListItem>
-        </Hidden>
+        {userInfo()}
       </List>
     </div>
   );
@@ -70,3 +91,19 @@ export default function ToggleMenu() {
     </React.Fragment>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleDispatchLogin: (data) => {
+      dispatch(actLoginSuccess(data));
+    },
+  };
+};
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.loginUserReducer.data,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToggleMenu);

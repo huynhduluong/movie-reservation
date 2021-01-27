@@ -1,15 +1,18 @@
-const { CHANGE_THEME_REQUEST } = require("./constant");
+import { CHANGE_THEME_REQUEST } from "./constant";
 
 let initialState = {
   themeStatus: false,
 };
 
 const changeThemeReducer = (state = initialState, action) => {
-  if (action.type === CHANGE_THEME_REQUEST) {
-    state.themeStatus = action.payload;
-    return { ...state };
+  switch (action.type) {
+    case CHANGE_THEME_REQUEST:
+      state.themeStatus = action.payload;
+      return { ...state };
+
+    default:
+      return { ...state };
   }
-  return { ...state };
 };
 
 export default changeThemeReducer;

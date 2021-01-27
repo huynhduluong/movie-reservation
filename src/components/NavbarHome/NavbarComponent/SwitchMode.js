@@ -3,7 +3,7 @@ import { Switch } from "@material-ui/core";
 import Brightness2Icon from "@material-ui/icons/Brightness2";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import { connect } from "react-redux";
-import { CHANGE_THEME_REQUEST } from "../modules/constant";
+import { actChangeTheme } from "../modules/action";
 
 function SwitchMode(props) {
   const { themeStatus, handleChangeTheme } = props;
@@ -36,14 +36,9 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  const action = (status) => ({
-    type: CHANGE_THEME_REQUEST,
-    payload: status,
-  });
-
   return {
     handleChangeTheme: (status) => {
-      dispatch(action(status));
+      dispatch(actChangeTheme(status));
       localStorage.setItem("themeStatus", JSON.stringify(status));
     },
   };

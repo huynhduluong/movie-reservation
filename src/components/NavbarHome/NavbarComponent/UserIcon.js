@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { Link } from "react-router-dom";
 import { useStyles } from "../NavbarStyle";
 import { Hidden, List, ListItem } from "@material-ui/core";
+import { connect } from "react-redux";
+import { actLoginSuccess } from "../../../containers/HomeTemplate/LoginPage/modules/action";
 
-export default function UserIcon() {
+function UserIcon(props) {
   const classes = useStyles();
-  const user = JSON.parse(localStorage.getItem("UserGuest"));
+  const user = props.user || JSON.parse(localStorage.getItem("UserGuest"));
+
+  useEffect(() => {
+    if (!props.user) {
+      props.handleDispatchLogin(user);
+    }
+  });
 
   const logOut = () => {
     localStorage.removeItem("UserGuest");
+    props.handleDispatchLogin(null);
   };
 
   const loginForm = () => {
@@ -45,3 +54,19 @@ export default function UserIcon() {
   };
   return <React.Fragment>{user ? userInfo() : loginForm()}</React.Fragment>;
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleDispatchLogin: (data) => {
+      dispatch(actLoginSuccess(data));
+    },
+  };
+};
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.loginUserReducer.data,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserIcon);

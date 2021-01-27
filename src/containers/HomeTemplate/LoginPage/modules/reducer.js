@@ -1,7 +1,7 @@
 import {
-  AUTH_FAILED,
-  AUTH_REQUEST,
-  AUTH_SUCCESS,
+  LOGIN_FAILED,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
   CHANGE_LAYOUT_FORM,
 } from "./constant";
 
@@ -10,6 +10,7 @@ const initialState = {
   loading: false,
   data: null,
   err: null,
+  dialogStatus: false,
 };
 
 const loginUserReducer = (state = initialState, action) => {
@@ -18,17 +19,17 @@ const loginUserReducer = (state = initialState, action) => {
       let { loginFormStatus } = state;
       state.loginFormStatus = !loginFormStatus;
       return { ...state };
-    case AUTH_REQUEST:
+    case LOGIN_REQUEST:
       state.loading = true;
       state.data = null;
       state.err = null;
       return { ...state };
-    case AUTH_SUCCESS:
+    case LOGIN_SUCCESS:
       state.loading = false;
       state.data = action.payload;
       state.err = null;
       return { ...state };
-    case AUTH_FAILED:
+    case LOGIN_FAILED:
       state.loading = false;
       state.data = null;
       state.err = action.payload;
