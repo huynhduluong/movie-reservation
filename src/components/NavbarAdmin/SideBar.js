@@ -62,7 +62,6 @@ const useStyles = makeStyles(() => ({
 
 const SideBar = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
-  const location = useLocation();
   const history = useHistory();
   const [open, setOpen] = React.useState(false);
 
@@ -78,12 +77,6 @@ const SideBar = ({ onMobileClose, openMobile }) => {
   const handleClose = () => {
     setOpen(false);
   };
-
-  useEffect(() => {
-    if (openMobile && onMobileClose) {
-      onMobileClose();
-    }
-  }, [location.pathname]);
 
   const handleLogout = () => {
     localStorage.removeItem("UserAdmin");
