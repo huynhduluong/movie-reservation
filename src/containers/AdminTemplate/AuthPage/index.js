@@ -23,7 +23,6 @@ class AuthPage extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.props.history);
     this.props.handleLogin(this.state, this.props.history);
   };
 

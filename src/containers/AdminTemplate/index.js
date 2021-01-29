@@ -8,7 +8,7 @@ function AdminLayout(props) {
   return (
     <Box display="flex">
       <CssBaseline />
-      <NavbarAdmin history={props.children.props.history} />
+      <NavbarAdmin />
       {props.children}
     </Box>
   );

@@ -3,6 +3,7 @@ import {
   Button,
   Container,
   Grid,
+  InputAdornment,
   Paper,
   Table,
   TableBody,
@@ -24,6 +25,7 @@ import {
   actEditUserAdmin,
 } from "./modules/action";
 import { UserAdminStyles } from "./modules/UserAdminStyles";
+import SearchIcon from "@material-ui/icons/Search";
 
 const columns = [
   { id: "taiKhoan", label: "Tài khoản", minWidth: 170 },
@@ -90,15 +92,14 @@ function UserPage(props) {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={5} md={3}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
               <Box
                 display="flex"
                 justifyContent="left"
                 alignItems="center"
                 height="100%"
                 width="auto"
-                marginX="20px"
               >
                 <Button
                   variant="contained"
@@ -109,25 +110,36 @@ function UserPage(props) {
                 </Button>
               </Box>
             </Grid>
-            <Grid item xs={12} sm={7} md={9}>
-              <Box
-                display="flex"
-                justifyContent="left"
-                alignItems="center"
-                height="100%"
-                width="auto"
-                marginX="20px"
-              >
-                <TextField
-                  id="outlined-basic"
-                  label="Search"
-                  variant="outlined"
-                  className={classes.inputSearch}
-                  onChange={handleChangeSearch}
-                  style={{ width: "100%" }}
-                />
-              </Box>
+            <Grid item xs={12}>
+              <Paper className={classes.root}>
+                <Box
+                  display="flex"
+                  justifyContent="left"
+                  alignItems="center"
+                  height="100%"
+                  maxWidth="500px"
+                  marginX="20px"
+                >
+                  <TextField
+                    fullWidth
+                    id="outlined-basic"
+                    label="Tìm kiếm người dùng"
+                    variant="outlined"
+                    className={classes.inputSearch}
+                    onChange={handleChangeSearch}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <SearchIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Box>
+              </Paper>
             </Grid>
+            {/* Data table */}
+
             <Grid item xs={12}>
               <Paper className={fixedHeightPaper}>
                 <Paper className={classes.root}>
@@ -222,8 +234,6 @@ function UserPage(props) {
             </Grid>
           </Grid>
         </Container>
-
-        {/* Data table */}
 
         <DialogUserAdmin />
       </main>
