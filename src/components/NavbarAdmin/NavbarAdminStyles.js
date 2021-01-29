@@ -28,6 +28,12 @@ export const NavbarAdminStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
+  paper: {
+    padding: theme.spacing(2),
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column",
+  },
   menuButton: {
     marginRight: 36,
   },

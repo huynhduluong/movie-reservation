@@ -121,7 +121,7 @@ export default function NavbarAdmin(props) {
         >
           <AccountCircle />
         </IconButton>
-        <p>Đăng xuất</p>
+        <span>Đăng xuất</span>
       </MenuItem>
     </Menu>
   );

@@ -1,23 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import { TabContext, TabPanel } from "@material-ui/lab";
+import React from "react";
 import {
   Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   FormControl,
   Grid,
   InputLabel,
-  Paper,
-  Typography,
-  Button,
-  Hidden,
+  MenuItem,
+  Select,
+  useMediaQuery,
+  useTheme,
 } from "@material-ui/core";
-import { NewInput, UserStyles } from "./UserStyles";
+import { connect } from "react-redux";
+import {
+  actAddUserAdminApi,
+  actChangeDialogUserAdminStatus,
+  actUpdateUserAdminApi,
+} from "./modules/action";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { actChangeInfoApi, actUserGuestApi } from "../LoginPage/modules/action";
+import {
+  NewInput,
+  UserStyles,
+} from "../../HomeTemplate/UserGuestPage/UserStyles";
 
 const validationSchema = Yup.object().shape({
   taiKhoan: Yup.string()
@@ -42,53 +50,57 @@ const validationSchema = Yup.object().shape({
   soDt: Yup.string()
     .matches(/^\d{10}$/, "Số ĐT không hợp lệ")
     .required("Vui lòng nhập số ĐT!"),
+  maLoaiNguoiDung: Yup.string().required("Vui lòng chọn loại người dùng!"),
 });
 
-function UserGuestPage(props) {
+function DialogUserAdmin(props) {
   const classes = UserStyles();
-  const { userGuestApi, user, handleChangeInfo } = props;
+  const {
+    changeDialogStatus,
+    dialogStatus,
+    handleAddUser,
+    userEdit,
+    handleUpdateUser,
+  } = props;
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
 
-  const [value, setValue] = useState("info");
-
-  useEffect(() => {
-    userGuestApi();
-  }, [userGuestApi]);
-
-  const handleChangeTab = (event, newValue) => {
-    setValue(newValue);
+  const handleClose = () => {
+    changeDialogStatus(false);
   };
-
-  if (!user && !JSON.parse(localStorage.getItem("UserGuest"))) {
-    return <Redirect to="/dang-nhap" />;
-  }
 
   const ValidationForm = () => {
     return (
       <React.Fragment>
         <Formik
           initialValues={
-            user || {
+            userEdit || {
               taiKhoan: "",
               matKhau: "",
               hoTen: "",
               email: "",
               soDt: "",
               maNhom: "GP09",
-              maLoaiNguoiDung: "KhachHang",
+              maLoaiNguoiDung: "",
             }
           }
           validationSchema={validationSchema}
           onSubmit={(values) => {
-            handleChangeInfo(values);
+            if (userEdit) {
+              values.maNhom = "GP09";
+              handleUpdateUser(values);
+            } else {
+              handleAddUser(values);
+            }
           }}
         >
           {({
+            touched,
             values,
             errors,
             handleChange,
-            handleSubmit,
             handleBlur,
-            touched,
+            handleSubmit,
           }) => (
             <form onSubmit={handleSubmit}>
               <Grid container spacing={3}>
@@ -142,6 +154,7 @@ function UserGuestPage(props) {
                         id="matKhau"
                         name="matKhau"
                         onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                       {touched.matKhau && errors.matKhau ? (
                         <div className={classes.error}>{errors.matKhau}</div>
@@ -171,6 +184,7 @@ function UserGuestPage(props) {
                         name="hoTen"
                         type="text"
                         onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                       {touched.hoTen && errors.hoTen ? (
                         <div className={classes.error}>{errors.hoTen}</div>
@@ -200,6 +214,7 @@ function UserGuestPage(props) {
                         type="text"
                         id="email"
                         onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                       {touched.email && errors.email ? (
                         <div className={classes.error}>{errors.email}</div>
@@ -229,6 +244,7 @@ function UserGuestPage(props) {
                         type="text"
                         id="soDt"
                         onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                       {touched.soDt && errors.soDt ? (
                         <div className={classes.error}>{errors.soDt}</div>
@@ -238,10 +254,56 @@ function UserGuestPage(props) {
                     </FormControl>
                   </Box>
                 </Grid>
+                <Grid item sm={6} xs={12}>
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <FormControl className={classes.formControl}>
+                      <InputLabel
+                        id="select-outlined-label"
+                        shrink
+                        className={classes.label}
+                      >
+                        Loại người dùng
+                      </InputLabel>
+                      <Select
+                        labelId="select-outlined-label"
+                        id="maLoaiNguoiDung"
+                        name="maLoaiNguoiDung"
+                        value={values.maLoaiNguoiDung}
+                        onChange={handleChange}
+                        input={<NewInput />}
+                      >
+                        <MenuItem value={"KhachHang"}>Khách hàng</MenuItem>
+                        <MenuItem value={"QuanTri"}>Quản trị</MenuItem>
+                      </Select>
+                      {touched.maLoaiNguoiDung && errors.maLoaiNguoiDung ? (
+                        <div className={classes.error}>
+                          {errors.maLoaiNguoiDung}
+                        </div>
+                      ) : (
+                        <React.Fragment></React.Fragment>
+                      )}
+                    </FormControl>
+                  </Box>
+                </Grid>
               </Grid>
               <Box display="flex" justifyContent="center" alignItems="center">
-                <Button variant="contained" color="primary" type="submit">
-                  Submit
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  disabled={
+                    !(
+                      Object.values(errors).length === 0 &&
+                      (Object.values(touched).length >= 5 ||
+                        (userEdit && Object.values(touched).length >= 1))
+                    )
+                  }
+                >
+                  {userEdit ? "Cập nhật" : "Xác nhận"}
                 </Button>
               </Box>
             </form>
@@ -251,112 +313,47 @@ function UserGuestPage(props) {
     );
   };
 
-  const renderHistoryItem = () => {
-    //use thongTinDatVe array to render historyItem
-    return (
-      <React.Fragment>
-        {[0, 1, 2].map((item) => {
-          return (
-            <Grid container spacing={3} key={item}>
-              <Grid item xs={5}>
-                <img
-                  src={`http://movie0706.cybersoft.edu.vn/hinhanh/ted-part-2_gp09.jfif`}
-                  alt={`http://movie0706.cybersoft.edu.vn/hinhanh/ted-part-2_gp09.jfif`}
-                  className={classes.image}
-                />
-              </Grid>
-              <Grid item xs={7}>
-                <Box className={classes.content}>
-                  <Typography component="h5" variant="h5">
-                    Tên phim
-                  </Typography>
-                  <Box display="flex">
-                    <span className={classes.ageLimitButton}>C18</span>
-                  </Box>
-                  <p>Ngày chiếu</p>
-                  <p>Giờ chiếu</p>
-                  <p>Tên cụm rạp</p>
-                  <p>Tên rạp - số ghế</p>
-                  <p>Số tiền</p>
-                </Box>
-              </Grid>
-            </Grid>
-          );
-        })}
-      </React.Fragment>
-    );
-  };
-
   return (
     <div>
-      <TabContext value={value}>
-        <Tabs
-          value={value}
-          onChange={handleChangeTab}
-          textColor="primary"
-          centered
-          aria-label="User info tab"
-        >
-          <Tab
-            label="Thông tin"
-            value="info"
-            className={value === "info" ? classes.tabActive : classes.tabNormal}
-          />
-          <Tab
-            label="Lịch sử đặt vé"
-            value="history"
-            className={
-              value === "history" ? classes.tabActive : classes.tabNormal
-            }
-          />
-        </Tabs>
-        <TabPanel value="info">
-          <Box
-            style={{
-              justifyContent: "center",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Paper className={classes.container}>{ValidationForm()}</Paper>
-          </Box>
-        </TabPanel>
-        <TabPanel value="history">
-          <Box
-            style={{
-              justifyContent: "center",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Paper className={classes.container}>{renderHistoryItem()}</Paper>
-          </Box>
-        </TabPanel>
-      </TabContext>
-      <Hidden smUp>
-        <Button variant="contained" color="secondary" component={Link} to="/">
-          Trang chủ
-        </Button>
-      </Hidden>
+      <Dialog
+        fullScreen={fullScreen}
+        open={dialogStatus}
+        onClose={handleClose}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogTitle id="responsive-dialog-title">
+          {userEdit ? "Cập nhật thông tin" : "Thêm người dùng"}
+        </DialogTitle>
+        <DialogContent>{ValidationForm()}</DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            Đóng
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    userGuestApi: () => {
-      dispatch(actUserGuestApi());
-    },
-    handleChangeInfo: (user) => {
-      dispatch(actChangeInfoApi(user));
-    },
-  };
-};
-
 const mapStateToProps = (state) => {
   return {
-    user: state.userGuestReducer.data,
+    dialogStatus: state.userAdminReducer.dialogStatus,
+    userEdit: state.userAdminReducer.userEdit,
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserGuestPage);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeDialogStatus: (status) => {
+      dispatch(actChangeDialogUserAdminStatus(status));
+    },
+    handleAddUser: (user) => {
+      dispatch(actAddUserAdminApi(user));
+    },
+    handleUpdateUser: (user) => {
+      dispatch(actUpdateUserAdminApi(user));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DialogUserAdmin);
