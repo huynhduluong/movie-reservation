@@ -5,6 +5,7 @@ import SwitchMode from "./NavbarComponent/SwitchMode";
 import UserIcon from "./NavbarComponent/UserIcon";
 import { useStyles } from "./NavbarStyle";
 import logo from "./../../assets/img/logo.png";
+import { HashLink } from "react-router-hash-link";
 
 export default function NavbarHome() {
   const classes = useStyles();
@@ -18,22 +19,47 @@ export default function NavbarHome() {
             variant="square"
             src={logo}
             className={classes.logo}
+            component="span"
           ></Avatar>
           <div className={classes.listNav}>
             <Hidden xsDown>
               <Box display="flex">
-                <a href="#carouselTabFilm" className={classes.link}>
+                <HashLink
+                  to="/#carouselTabFilm"
+                  scroll={(el) =>
+                    el.scrollIntoView({ behavior: "smooth", block: "end" })
+                  }
+                  className={classes.link}
+                >
                   Lịch chiếu
-                </a>
-                <a href="#cumrap" className={classes.link}>
+                </HashLink>
+                <HashLink
+                  to="/#cumrap"
+                  scroll={(el) =>
+                    el.scrollIntoView({ behavior: "smooth", block: "end" })
+                  }
+                  className={classes.link}
+                >
                   Cụm rạp
-                </a>
-                <a href="#appPromotion" className={classes.link}>
+                </HashLink>
+                <HashLink
+                  to="/#appPromotion"
+                  scroll={(el) =>
+                    el.scrollIntoView({ behavior: "smooth", block: "end" })
+                  }
+                  className={classes.link}
+                >
                   Tin tức
-                </a>
-                <a href="#appPromotion" className={classes.link}>
+                </HashLink>
+                <HashLink
+                  to="/#appPromotion"
+                  scroll={(el) =>
+                    el.scrollIntoView({ behavior: "smooth", block: "end" })
+                  }
+                  className={classes.link}
+                >
                   Ứng dụng
-                </a>
+                </HashLink>
               </Box>
             </Hidden>
           </div>

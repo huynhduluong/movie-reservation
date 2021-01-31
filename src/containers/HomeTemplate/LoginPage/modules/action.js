@@ -23,7 +23,7 @@ export const actLoginApi = (user, history) => {
         dispatch(actUserGuestSuccess(result.data));
         if (result.data.maLoaiNguoiDung === "KhachHang") {
           localStorage.setItem("UserGuest", JSON.stringify(result.data));
-          history.push("/");
+          history.goBack();
         } else {
           alert("Vui lòng đăng nhập ở trang admin");
         }
