@@ -37,11 +37,6 @@ const items = [
     icon: MovieIcon,
     title: "Film Management",
   },
-  {
-    href: "/account-admin",
-    icon: AccountCircle,
-    title: "Account",
-  },
 ];
 
 const useStyles = makeStyles(() => ({
