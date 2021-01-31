@@ -5,9 +5,6 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
-import Deposits from "./Deposits";
-import Orders from "./Orders";
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -49,15 +46,11 @@ export default function DashboardPage() {
             </Grid>
             {/* Recent Deposits */}
             <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
+              <Paper className={fixedHeightPaper}>{/* <Deposits /> */}</Paper>
             </Grid>
             {/* Recent Orders */}
             <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
+              <Paper className={classes.paper}>{/* <Orders /> */}</Paper>
             </Grid>
           </Grid>
         </Container>

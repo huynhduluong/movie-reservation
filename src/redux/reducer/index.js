@@ -7,6 +7,7 @@ import detailPageReducer from "./../../containers/HomeTemplate/DetailFilmPage/mo
 import dialogReducer from "./../../components/DialogMovie/modules/reducer";
 import authReducer from "./../../containers/AdminTemplate/AuthPage/modules/reducer";
 import userAdminReducer from "./../../containers/AdminTemplate/UserPage/modules/reducer";
+import filmAdminReducer from "./../../containers/AdminTemplate/FilmPage/modules/reducer";
 
 const rootReducer = combineReducers({
   changeThemeReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   authReducer,
   userGuestReducer,
   userAdminReducer,
+  filmAdminReducer,
 });
 
 export default rootReducer;

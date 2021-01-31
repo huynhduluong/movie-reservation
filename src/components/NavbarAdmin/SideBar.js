@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Link as RouterLink, useHistory, useLocation } from "react-router-dom";
+import React from "react";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import {
   Avatar,
   Box,
@@ -38,7 +38,7 @@ const items = [
     title: "Film Management",
   },
   {
-    href: "/account",
+    href: "/account-admin",
     icon: AccountCircle,
     title: "Account",
   },

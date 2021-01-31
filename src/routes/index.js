@@ -1,3 +1,4 @@
+import AccountPage from "../containers/AdminTemplate/AccountPage";
 import DashboardPage from "../containers/AdminTemplate/DashboardPage";
 import FilmPage from "../containers/AdminTemplate/FilmPage";
 import UserPage from "../containers/AdminTemplate/UserPage";
@@ -38,6 +39,11 @@ const routesAdmin = [
     exact: false,
     path: "/film-admin",
     component: FilmPage,
+  },
+  {
+    exact: false,
+    path: "/account-admin",
+    component: AccountPage,
   },
 ];
 

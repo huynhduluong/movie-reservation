@@ -44,7 +44,7 @@ export const actAddUserAdminApi = (user) => {
     })
       .then((result) => {
         alert("Đã tạo thành công");
-        dispatch(actUserAdminApi());
+        dispatch(actUserAdminApi(""));
       })
       .catch((err) => {
         alert(err.response.data);
@@ -67,7 +67,7 @@ export const actUpdateUserAdminApi = (user) => {
     })
       .then((result) => {
         alert("Đã cập nhật thành công");
-        dispatch(actUserAdminApi());
+        dispatch(actUserAdminApi(""));
       })
       .catch((err) => {
         alert(err.response.data);
@@ -87,11 +87,11 @@ export const actDeleteUserAdminApi = (taiKhoan) => {
       },
     })
       .then((result) => {
-        dispatch(actUserAdminApi());
+        dispatch(actUserAdminApi(""));
         alert("Xóa thành công");
       })
       .catch((err) => {
-        dispatch(actUserAdminApi());
+        dispatch(actUserAdminApi(""));
       });
   };
 };
