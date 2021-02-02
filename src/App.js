@@ -53,7 +53,7 @@ function App(props) {
 
         <Route exact={false} path="/auth" component={AuthPage} />
         <Route exact={false} path="/dang-nhap" component={LoginPage} />
-        <Route exact={false} path="/checkout" component={CheckoutPage} />
+        <Route exact={false} path="/checkout/:id" component={CheckoutPage} />
         <Route path="*" component={PageNotFound} />
       </Switch>
     </BrowserRouter>

@@ -12,6 +12,7 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -88,10 +89,19 @@ const useStyle = makeStyles((theme) => ({
 
 export default function ShowTimeList(props) {
   const classes = useStyle();
+  const history = useHistory();
   const { listShowTime } = props;
   const matchBreakpoint = useMediaQuery((theme) =>
     theme.breakpoints.down("xs")
   );
+  console.log(listShowTime);
+  const handleClickReserve = (id) => {
+    const user = JSON.parse(localStorage.getItem("UserGuest"));
+    if (user) {
+      history.push(`/checkout/${id}`);
+    } else history.push("/dang-nhap");
+  };
+
   const renderShowTime = (listShowTimeItem) => {
     return listShowTimeItem
       .filter((item) => {
@@ -103,6 +113,9 @@ export default function ShowTimeList(props) {
             variant="contained"
             className={classes.showTime}
             key={item.maLichChieu}
+            onClick={() => {
+              handleClickReserve(item.maLichChieu);
+            }}
           >
             {new Date(item.ngayChieuGioChieu).toLocaleTimeString([], {
               hour: "2-digit",

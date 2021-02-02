@@ -4,6 +4,7 @@ import changeThemeReducer from "./../../components/NavbarHome/modules/reducer";
 import listMovieReducer from "./../../containers/HomeTemplate/HomePage/modules/ListMovie/reducer";
 import listShowTimeReducer from "./../../containers/HomeTemplate/HomePage/modules/ListShowTime/reducer";
 import detailPageReducer from "./../../containers/HomeTemplate/DetailFilmPage/modules/reducer";
+import checkoutReducer from "./../../containers/HomeTemplate/CheckoutPage/modules/reducer";
 import dialogReducer from "./../../components/DialogMovie/modules/reducer";
 import authReducer from "./../../containers/AdminTemplate/AuthPage/modules/reducer";
 import userAdminReducer from "./../../containers/AdminTemplate/UserPage/modules/reducer";
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   userGuestReducer,
   userAdminReducer,
   filmAdminReducer,
+  checkoutReducer,
 });
 
 export default rootReducer;

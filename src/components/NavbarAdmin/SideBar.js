@@ -17,7 +17,6 @@ import {
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
 import MovieIcon from "@material-ui/icons/Movie";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import SideBarItem from "./SideBarItem";
 import InputIcon from "@material-ui/icons/Input";
 
