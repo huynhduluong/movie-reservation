@@ -37,6 +37,7 @@ function ShowTimeTab(props) {
     listLogo,
     currentLogo,
     currentDateIndex,
+    listShowTime,
   } = props;
   const handleLogoClick = (event, index) => {
     changeLogoCinema(index);
@@ -76,9 +77,7 @@ function ShowTimeTab(props) {
             </AccordionSummary>
             <AccordionDetails>
               {expanded === item.tenHeThongRap ? (
-                <ShowTimeList
-                  listShowTime={data.heThongRapChieu[0].cumRapChieu}
-                />
+                <ShowTimeList listShowTime={listShowTime} />
               ) : (
                 ""
               )}
@@ -119,7 +118,7 @@ function ShowTimeTab(props) {
                 matchBreakpoint={matchBreakpoint}
               />
             </CustomScrollbars>
-            <ShowTimeList listShowTime={data.heThongRapChieu[0].cumRapChieu} />
+            <ShowTimeList listShowTime={listShowTime} />
           </CustomScrollbars>
         </Box>
       </Hidden>
@@ -148,6 +147,7 @@ const mapStateToProps = (state) => {
     listLogo: state.detailPageReducer.listLogo,
     currentLogo: state.detailPageReducer.currentLogo,
     currentDateIndex: state.detailPageReducer.currentDateIndex,
+    listShowTime: state.detailPageReducer.listShowTime,
   };
 };
 

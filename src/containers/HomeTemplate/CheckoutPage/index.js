@@ -262,6 +262,33 @@ const CheckoutPageStyles = makeStyles((theme) => ({
       transform: "translate(-50%,-50%)",
     },
   },
+  noteSeat: {
+    marginTop: "30px",
+    textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  typeSeat: {
+    marginRight: "21px",
+    display: "inline-block",
+    flexDiretion: "column",
+  },
+  nameSeat: {
+    display: "block",
+    color: "#9b9b9b",
+    fontSize: "12px",
+  },
+  guestChosen: {
+    color: "#44c020",
+  },
+  anphabet: {
+    position: "relative",
+    display: "inline-block",
+    width: "30px",
+    height: "26px",
+    marginRight: "25px",
+  },
 }));
 
 function CheckoutPage(props) {
@@ -286,12 +313,32 @@ function CheckoutPage(props) {
   };
 
   const handleSeatMap = () => {
-    return data.danhSachGhe.map((chair) => {
+    var count = 0;
+    return ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"].map((item) => {
+      let arr = data.danhSachGhe.slice(count, count + 16);
+      count += 16;
       return (
-        <WeekendIcon
-          key={chair.maGhe}
-          color={chair.loaiGhe === "Thuong" ? "inherit" : "primary"}
-        />
+        <div>
+          <span className={classes.anphabet}>{item}</span>
+          {arr.map((chair) => {
+            if (chair.daDat) {
+              return (
+                <WeekendIcon
+                  key={chair.maGhe}
+                  color="disabled"
+                  style={{ marginRight: "5px" }}
+                />
+              );
+            }
+            return (
+              <WeekendIcon
+                key={chair.maGhe}
+                color={chair.loaiGhe === "Thuong" ? "inherit" : "primary"}
+                style={{ cursor: "pointer", marginRight: "5px" }}
+              />
+            );
+          })}
+        </div>
       );
     });
   };
@@ -302,7 +349,7 @@ function CheckoutPage(props) {
     return (
       <div>
         <Box className={classes.topCheckout}>
-          <div className={classes.leftStep}>01 CHỌN GHẾ</div>
+          <div className={classes.leftStep}>ĐẶT VÉ</div>
           <div>
             <RouterLink className={classes.rightStep} to="/">
               <span>Thoát</span>
@@ -338,12 +385,41 @@ function CheckoutPage(props) {
             </Box>
           </Box>
           <Box className={classes.seatmap}>
-            <Box overflow="auto hidden">
-              <Box textAlign="center" margin="auto">
+            <Box overflow="scroll hidden">
+              <Box textAlign="center" margin="auto" width="627px">
                 <Box>
                   <img src={Screen} alt="screen" style={{ width: "90%" }} />
                 </Box>
-                <Box>{handleSeatMap()}</Box>
+                <Box marginBottom="20px">{handleSeatMap()}</Box>
+              </Box>
+            </Box>
+            <Box className={classes.noteSeat}>
+              <Box marginTop="5px">
+                <span className={classes.typeSeat}>
+                  <WeekendIcon color="inherit" />
+                  <span className={classes.nameSeat}>Ghế thường</span>
+                </span>
+              </Box>
+              <Box marginTop="5px">
+                <span className={classes.typeSeat}>
+                  <WeekendIcon color="primary" />
+                  <span className={classes.nameSeat}>Ghế VIP</span>
+                </span>
+              </Box>
+              <Box marginTop="5px">
+                <span className={classes.typeSeat}>
+                  <WeekendIcon
+                    color="primary"
+                    className={classes.guestChosen}
+                  />
+                  <span className={classes.nameSeat}>Ghế đang chọn</span>
+                </span>
+              </Box>
+              <Box marginTop="5px">
+                <span className={classes.typeSeat}>
+                  <WeekendIcon color="disabled" />
+                  <span className={classes.nameSeat}>Ghế đã có người chọn</span>
+                </span>
               </Box>
             </Box>
           </Box>

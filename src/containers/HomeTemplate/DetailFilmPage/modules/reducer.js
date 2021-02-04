@@ -65,7 +65,7 @@ const detailPageReducer = (state = initialState, action) => {
       state.currentDate = new Date().getDate();
       state.listShowTime = handleListShowTime(
         state.data,
-        state.currentLogo,
+        action.payload,
         state.currentDate
       );
       return { ...state };
