@@ -54,7 +54,7 @@ const renderDate = (matchBreakpoint, date) => {
   if (matchBreakpoint) {
     return date.getDay() === 0 ? "CN" : `Th${date.getDay() + 1}`;
   } else {
-    return date.getDay() === 0 ? "Chủ Nhật" : `Thứ ${date.getDay() + 1}`;
+    return date.getDay() === 0 ? "CN" : `Thứ ${date.getDay() + 1}`;
   }
 };
 
